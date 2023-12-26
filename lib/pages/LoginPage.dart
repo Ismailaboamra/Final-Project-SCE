@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors, file_names
 
-import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
