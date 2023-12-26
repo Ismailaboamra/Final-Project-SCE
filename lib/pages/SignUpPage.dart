@@ -103,7 +103,7 @@ class SignUp extends StatelessWidget {
                     Navigator.pushNamed(context, '/LoginForm');
                   },
                   child: Text(
-                    "SIGNUP",
+                    "LogIn",
                     style: TextStyle(fontSize: 18, color: Colors.black),
                   ),
                 ),
