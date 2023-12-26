@@ -7,13 +7,21 @@ class MyTextField extends StatelessWidget {
   final String hintTextt;
   final bool obscureText;
   final IconData prefixIcon;
+  final TextEditingController myController;
 
-  const MyTextField({super.key, required this.keyboardTypee, required this.hintTextt, required this.obscureText, required this.prefixIcon});
-
+  const MyTextField({
+    super.key,
+    required this.keyboardTypee,
+    required this.hintTextt,
+    required this.obscureText,
+    required this.prefixIcon,
+    required this.myController,
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: myController,
       keyboardType: keyboardTypee,
       obscureText: obscureText,
       textInputAction: TextInputAction.next,

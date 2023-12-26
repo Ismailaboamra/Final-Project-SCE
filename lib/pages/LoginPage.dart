@@ -1,12 +1,17 @@
 // ignore_for_file: prefer_const_constructors, file_names
 
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../shared/MyTextField.dart';
 
 class LoginForm extends StatelessWidget {
-  const LoginForm({super.key});
+   LoginForm({super.key});
+
+  final username_Controller = TextEditingController();
+  final Password_Credential = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +35,6 @@ class LoginForm extends StatelessWidget {
         elevation: 15,
         title: Text("LogIn Page"),
         centerTitle: true,
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/LoginForm');
-            },
-            icon: Icon(
-              Icons.undo,
-              size: 33,
-            )),
       ),
       body: SizedBox(
         width: double.infinity,
@@ -63,6 +60,7 @@ class LoginForm extends StatelessWidget {
                     color: const Color.fromARGB(255, 255, 255, 255)),
                 width: 300,
                 child: MyTextField(
+                    myController: username_Controller,
                     keyboardTypee: TextInputType.emailAddress,
                     hintTextt: "USERNAME",
                     obscureText: false,
@@ -76,6 +74,7 @@ class LoginForm extends StatelessWidget {
                     color: Colors.white),
                 width: 300,
                 child: MyTextField(
+                    myController: Password_Credential,
                     keyboardTypee: TextInputType.visiblePassword,
                     hintTextt: "Enter Your Password :",
                     obscureText: true,
