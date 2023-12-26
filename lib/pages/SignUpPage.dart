@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unused_local_variable
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -6,16 +6,23 @@ import 'package:flutter_svg/svg.dart';
 
 import '../shared/MyTextField.dart';
 
-class SignUp extends StatelessWidget {
-   SignUp({super.key});
+class SignUp extends StatefulWidget {
+  SignUp({super.key});
 
+  @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
   final email_Controller = TextEditingController();
+
   final username_Controller = TextEditingController();
+
   final password1_Controller = TextEditingController();
+
   final password2_Controller = TextEditingController();
 
-
-
+  // void Print_values() {
   SignUP() async {
     try {
       final credential =
@@ -35,6 +42,14 @@ class SignUp extends StatelessWidget {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    email_Controller.dispose();
+    password1_Controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -49,97 +64,101 @@ class SignUp extends StatelessWidget {
         title: Text("SignUp Page"),
         centerTitle: true,
       ),
-      body: SizedBox(
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 50,
-            ),
-            
-            SvgPicture.asset(
-              "assets/img/userlogo.svg",
-              alignment: Alignment.topCenter,
-              height: 120,
-              width: 150,
-            ),
-            Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40),
-                    color: const Color.fromARGB(255, 255, 255, 255)),
-                width: 300,
-                child: MyTextField(
-                    myController: username_Controller,
-                    keyboardTypee: TextInputType.name,
-                    hintTextt: "USERNAME",
-                    obscureText: false,
-                    prefixIcon: Icons.person)),
-            Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40),
-                    color: const Color.fromARGB(255, 255, 255, 255)),
-                width: 300,
-                child: MyTextField(
-                    myController: email_Controller,
-                    keyboardTypee: TextInputType.emailAddress,
-                    hintTextt: "Email",
-                    obscureText: false,
-                    prefixIcon: Icons.email)),
-            Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40),
-                    color: const Color.fromARGB(255, 255, 255, 255)),
-                width: 300,
-                child: MyTextField(
-                    myController: password1_Controller,
-                    keyboardTypee: TextInputType.visiblePassword,
-                    hintTextt: "PASSWORD 1",
-                    obscureText: true,
-                    prefixIcon: Icons.password)),
-            Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40),
-                    color: const Color.fromARGB(255, 255, 255, 255)),
-                width: 300,
-                child: MyTextField(
-                    myController: password2_Controller,
-                    keyboardTypee: TextInputType.visiblePassword,
-                    hintTextt: "PASSWORD 2",
-                    obscureText: true,
-                    prefixIcon: Icons.password)),
-            SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all(Color.fromARGB(255, 0, 232, 159)),
+      body: SingleChildScrollView(
+        child: SizedBox(
+          // width: double.infinity,
+          child: Column(
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 20,
               ),
-              child: Text("LogIn",
-                  style: TextStyle(fontSize: 25, color: Colors.black)),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "I alredy have account,",
-                  style: TextStyle(fontSize: 16),
+              SvgPicture.asset(
+                "assets/img/userlogo.svg",
+                // alignment: Alignment.topCenter,
+                height: 120,
+                width: 150,
+              ),
+              Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(40),
+                      color: const Color.fromARGB(255, 255, 255, 255)),
+                  width: 300,
+                  child: MyTextField(
+                      myController: username_Controller,
+                      keyboardTypee: TextInputType.name,
+                      hintTextt: "USERNAME",
+                      obscureText: false,
+                      prefixIcon: Icons.person)),
+              Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(40),
+                      color: const Color.fromARGB(255, 255, 255, 255)),
+                  width: 300,
+                  child: MyTextField(
+                      myController: email_Controller,
+                      keyboardTypee: TextInputType.emailAddress,
+                      hintTextt: "Email",
+                      obscureText: false,
+                      prefixIcon: Icons.email)),
+              Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(40),
+                      color: const Color.fromARGB(255, 255, 255, 255)),
+                  width: 300,
+                  child: MyTextField(
+                      myController: password1_Controller,
+                      keyboardTypee: TextInputType.visiblePassword,
+                      hintTextt: "PASSWORD 1",
+                      obscureText: true,
+                      prefixIcon: Icons.password)),
+              Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(40),
+                      color: const Color.fromARGB(255, 255, 255, 255)),
+                  width: 300,
+                  child: MyTextField(
+                      myController: password2_Controller,
+                      keyboardTypee: TextInputType.visiblePassword,
+                      hintTextt: "PASSWORD 2",
+                      obscureText: true,
+                      prefixIcon: Icons.password)),
+              SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  SignUP();
+                  print("succsefuly!!");
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(
+                      Color.fromARGB(255, 0, 232, 159)),
                 ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/LoginForm');
-                  },
-                  child: Text(
-                    "LogIn",
-                    style: TextStyle(fontSize: 18, color: Colors.black),
+                child: Text("SignUp",
+                    style: TextStyle(fontSize: 25, color: Colors.black)),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "I alredy have account,",
+                    style: TextStyle(fontSize: 16),
                   ),
-                ),
-              ],
-            )
-          ],
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/LoginForm');
+                    },
+                    child: Text(
+                      "LogIn",
+                      style: TextStyle(fontSize: 18, color: Colors.black),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
