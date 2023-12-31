@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unused_local_variable, non_constant_identifier_names, use_build_context_synchronously, unused_import
+// ignore_for_file: prefer_const_constructors, unused_local_variable, non_constant_identifier_names, use_build_context_synchronously, unused_import, unused_field
 
 import 'package:final_project_sce/shared/SnackBar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,12 +17,11 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   final email_Controller = TextEditingController();
-
   final username_Controller = TextEditingController();
-
   final password1_Controller = TextEditingController();
-
   final password2_Controller = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
   bool isLoading = false;
 
   // void Print_values() {
@@ -79,128 +78,143 @@ class _SignUpState extends State<SignUp> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        child: SizedBox(
-          // width: double.infinity,
-          child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.center,
-            // mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 20,
-              ),
-              SvgPicture.asset(
-                "assets/img/userlogo.svg",
-                // alignment: Alignment.topCenter,
-                height: 120,
-                width: 150,
-              ),
-              SizedBox(height: 20),
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(0),
-                      color: Color.fromARGB(179, 213, 213, 213)),
-                  width: 350,
-                  child: MyTextField(
-                      validator: (value) {
-                        return null;
-                      },
-                      autovalidateMode: AutovalidateMode.disabled,
-                      myController: username_Controller,
-                      keyboardTypee: TextInputType.name,
-                      hintTextt: "USERNAME",
-                      obscureText: false,
-                      prefixIcon: Icons.person)),
-              SizedBox(height: 20),
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(0),
-                      color: Color.fromARGB(179, 213, 213, 213)),
-                  width: 350,
-                  child: MyTextField(
-                      validator: (value) {
-                        return value != null && !EmailValidator.validate(value)
-                            ? "Enter a valid email"
-                            : null;
-                      },
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      myController: email_Controller,
-                      keyboardTypee: TextInputType.emailAddress,
-                      hintTextt: "Email",
-                      obscureText: false,
-                      prefixIcon: Icons.email)),
-              SizedBox(height: 20),
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(0),
-                      color: Color.fromARGB(179, 213, 213, 213)),
-                  width: 350,
-                  child: MyTextField(
-                      validator: (value) {
-                        return value!.length < 8
-                            ? "Enter at least 6 characters"
-                            : null;
-                      },
-                      autovalidateMode: AutovalidateMode.disabled,
-                      myController: password1_Controller,
-                      keyboardTypee: TextInputType.visiblePassword,
-                      hintTextt: "PASSWORD 1",
-                      obscureText: true,
-                      prefixIcon: Icons.password)),
-              SizedBox(height: 20),
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(0),
-                      color: Color.fromARGB(179, 213, 213, 213)),
-                  width: 350,
-                  child: MyTextField(
-                      validator: (value) {
-                        return value!.length < 8
-                            ? "Enter at least 6 characters"
-                            : null;
-                      },
-                      autovalidateMode: AutovalidateMode.disabled,
-                      myController: password2_Controller,
-                      keyboardTypee: TextInputType.visiblePassword,
-                      hintTextt: "PASSWORD 2",
-                      obscureText: true,
-                      prefixIcon: Icons.password)),
-              SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  SignUP();
-                },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                      Color.fromARGB(255, 0, 232, 159)),
+        child: Form(
+          key: _formKey,
+          child: SizedBox(
+            // width: double.infinity,
+            child: Column(
+              // crossAxisAlignment: CrossAxisAlignment.center,
+              // mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 20,
                 ),
-                child: isLoading
-                    ? CircularProgressIndicator(
-                        color: Colors.black,
-                      )
-                    : Text("SignUp",
-                        style: TextStyle(fontSize: 25, color: Colors.black)),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "I alredy have account,",
-                    style: TextStyle(fontSize: 16),
+                SvgPicture.asset(
+                  "assets/img/userlogo.svg",
+                  // alignment: Alignment.topCenter,
+                  height: 120,
+                  width: 150,
+                ),
+                SizedBox(height: 20),
+                Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(0),
+                        color: Color.fromARGB(179, 213, 213, 213)),
+                    width: 350,
+                    child: MyTextField(
+                        validator: (value) {
+                          return null;
+                        },
+                        autovalidateMode: AutovalidateMode.disabled,
+                        myController: username_Controller,
+                        keyboardTypee: TextInputType.name,
+                        hintTextt: "USERNAME",
+                        obscureText: false,
+                        prefixIcon: Icons.person)),
+                SizedBox(height: 20),
+                Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(0),
+                        color: Color.fromARGB(179, 213, 213, 213)),
+                    width: 350,
+                    child: MyTextField(
+                        validator: (value) {
+                          if (value != null &&
+                              !EmailValidator.validate(value)) {
+                            return "   Enter a valid email";
+                          } else {
+                            return null;
+                          }
+                        },
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        myController: email_Controller,
+                        keyboardTypee: TextInputType.emailAddress,
+                        hintTextt: "Email",
+                        obscureText: false,
+                        prefixIcon: Icons.email)),
+                SizedBox(height: 20),
+                Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(0),
+                        color: Color.fromARGB(179, 213, 213, 213)),
+                    width: 350,
+                    child: MyTextField(
+                        validator: (value) {
+                          if (value!.length < 8) {
+                            return "   Enter at least 8 characters";
+                          } else {
+                            return null;
+                          }
+                        },
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        myController: password1_Controller,
+                        keyboardTypee: TextInputType.visiblePassword,
+                        hintTextt: "PASSWORD 1",
+                        obscureText: true,
+                        prefixIcon: Icons.password)),
+                SizedBox(height: 20),
+                Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(0),
+                        color: Color.fromARGB(179, 213, 213, 213)),
+                    width: 350,
+                    child: MyTextField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return '   Please confirm your password';
+                          } else if (value != password1_Controller.text) {
+                            return '   Passwords do not match';
+                          }
+                          return null;
+                        },
+                        autovalidateMode: AutovalidateMode.disabled,
+                        myController: password2_Controller,
+                        keyboardTypee: TextInputType.visiblePassword,
+                        hintTextt: "PASSWORD 2",
+                        obscureText: true,
+                        prefixIcon: Icons.password)),
+                SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      SignUP();
+                    } else {
+                      showSnackBar(context, 'ERROR');
+                    }
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                        Color.fromARGB(255, 0, 232, 159)),
                   ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/LoginForm');
-                    },
-                    child: Text(
-                      "LogIn",
-                      style: TextStyle(fontSize: 18, color: Colors.black),
+                  child: isLoading
+                      ? CircularProgressIndicator(
+                          color: Colors.black,
+                        )
+                      : Text("SignUp",
+                          style: TextStyle(fontSize: 25, color: Colors.black)),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "I alredy have account,",
+                      style: TextStyle(fontSize: 16),
                     ),
-                  ),
-                ],
-              )
-            ],
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/LoginForm');
+                      },
+                      child: Text(
+                        "LogIn",
+                        style: TextStyle(fontSize: 18, color: Colors.black),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
