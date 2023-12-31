@@ -21,9 +21,13 @@ class _SignUpState extends State<SignUp> {
   final password1_Controller = TextEditingController();
 
   final password2_Controller = TextEditingController();
+  bool isLoading = false;
 
   // void Print_values() {
   SignUP() async {
+    setState(() {
+      isLoading = true;
+    });
     try {
       final credential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -39,6 +43,9 @@ class _SignUpState extends State<SignUp> {
     } catch (e) {
       print(e);
     }
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
@@ -130,13 +137,12 @@ class _SignUpState extends State<SignUp> {
               ElevatedButton(
                 onPressed: () {
                   SignUP();
-                  print("succsefuly!!");
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(
                       Color.fromARGB(255, 0, 232, 159)),
                 ),
-                child: Text("SignUp",
+                child: isLoading? CircularProgressIndicator(color: Colors.black,):Text("SignUp",
                     style: TextStyle(fontSize: 25, color: Colors.black)),
               ),
               Row(
