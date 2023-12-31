@@ -13,6 +13,7 @@ class HomePage extends StatelessWidget {
         titleTextStyle: TextStyle(fontSize: 27, color: Colors.black),
         centerTitle: true,
         backgroundColor: Color.fromARGB(255, 0, 232, 159),
+    
       ),
 
     );

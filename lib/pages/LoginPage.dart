@@ -1,5 +1,4 @@
-// ignore_for_file: prefer_const_constructors, file_names
-
+// ignore_for_file: prefer_const_constructors, file_names, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import '../shared/MyTextField.dart';
 
 class LoginForm extends StatelessWidget {
-   LoginForm({super.key});
+  LoginForm({super.key});
 
   final username_Controller = TextEditingController();
   final Password_Credential = TextEditingController();
@@ -59,6 +58,10 @@ class LoginForm extends StatelessWidget {
                     color: const Color.fromARGB(255, 255, 255, 255)),
                 width: 300,
                 child: MyTextField(
+                    validator: (value) {
+                      return null;
+                    },
+                    autovalidateMode: AutovalidateMode.disabled,
                     myController: username_Controller,
                     keyboardTypee: TextInputType.emailAddress,
                     hintTextt: "USERNAME",
@@ -73,6 +76,10 @@ class LoginForm extends StatelessWidget {
                     color: Colors.white),
                 width: 300,
                 child: MyTextField(
+                    validator: (p0) {
+                      
+                    },
+                    autovalidateMode: AutovalidateMode.disabled,
                     myController: Password_Credential,
                     keyboardTypee: TextInputType.visiblePassword,
                     hintTextt: "Enter Your Password :",
