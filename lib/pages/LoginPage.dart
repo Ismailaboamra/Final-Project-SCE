@@ -1,5 +1,4 @@
-// ignore_for_file: prefer_const_constructors, file_names
-
+// ignore_for_file: prefer_const_constructors, file_names, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import '../shared/MyTextField.dart';
 
 class LoginForm extends StatelessWidget {
-   LoginForm({super.key});
+  LoginForm({super.key});
 
   final username_Controller = TextEditingController();
   final Password_Credential = TextEditingController();
