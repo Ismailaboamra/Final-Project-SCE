@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, unused_field
 
 import 'package:flutter/material.dart';
 
@@ -8,6 +8,8 @@ class MyTextField extends StatelessWidget {
   final bool obscureText;
   final IconData prefixIcon;
   final TextEditingController myController;
+  final String? Function(String?)? validator;
+  final AutovalidateMode autovalidateMode;
 
   const MyTextField({
     super.key,
@@ -16,11 +18,15 @@ class MyTextField extends StatelessWidget {
     required this.obscureText,
     required this.prefixIcon,
     required this.myController,
+    required this.validator,
+    required this.autovalidateMode,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      autovalidateMode: autovalidateMode,
+      validator: validator,
       controller: myController,
       keyboardType: keyboardTypee,
       obscureText: obscureText,

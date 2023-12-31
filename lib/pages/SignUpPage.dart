@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_const_constructors, unused_local_variable, non_constant_identifier_names, use_build_context_synchronously
+// ignore_for_file: prefer_const_constructors, unused_local_variable, non_constant_identifier_names, use_build_context_synchronously, unused_import
 
 import 'package:final_project_sce/shared/SnackBar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -93,45 +94,71 @@ class _SignUpState extends State<SignUp> {
                 height: 120,
                 width: 150,
               ),
+              SizedBox(height: 20),
               Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40),
-                      color: const Color.fromARGB(255, 255, 255, 255)),
-                  width: 300,
+                      borderRadius: BorderRadius.circular(0),
+                      color: Color.fromARGB(179, 213, 213, 213)),
+                  width: 350,
                   child: MyTextField(
+                      validator: (value) {
+                        return null;
+                      },
+                      autovalidateMode: AutovalidateMode.disabled,
                       myController: username_Controller,
                       keyboardTypee: TextInputType.name,
                       hintTextt: "USERNAME",
                       obscureText: false,
                       prefixIcon: Icons.person)),
+              SizedBox(height: 20),
               Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40),
-                      color: const Color.fromARGB(255, 255, 255, 255)),
-                  width: 300,
+                      borderRadius: BorderRadius.circular(0),
+                      color: Color.fromARGB(179, 213, 213, 213)),
+                  width: 350,
                   child: MyTextField(
+                      validator: (value) {
+                        return value != null && !EmailValidator.validate(value)
+                            ? "Enter a valid email"
+                            : null;
+                      },
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
                       myController: email_Controller,
                       keyboardTypee: TextInputType.emailAddress,
                       hintTextt: "Email",
                       obscureText: false,
                       prefixIcon: Icons.email)),
+              SizedBox(height: 20),
               Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40),
-                      color: const Color.fromARGB(255, 255, 255, 255)),
-                  width: 300,
+                      borderRadius: BorderRadius.circular(0),
+                      color: Color.fromARGB(179, 213, 213, 213)),
+                  width: 350,
                   child: MyTextField(
+                      validator: (value) {
+                        return value!.length < 8
+                            ? "Enter at least 6 characters"
+                            : null;
+                      },
+                      autovalidateMode: AutovalidateMode.disabled,
                       myController: password1_Controller,
                       keyboardTypee: TextInputType.visiblePassword,
                       hintTextt: "PASSWORD 1",
                       obscureText: true,
                       prefixIcon: Icons.password)),
+              SizedBox(height: 20),
               Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40),
-                      color: const Color.fromARGB(255, 255, 255, 255)),
-                  width: 300,
+                      borderRadius: BorderRadius.circular(0),
+                      color: Color.fromARGB(179, 213, 213, 213)),
+                  width: 350,
                   child: MyTextField(
+                      validator: (value) {
+                        return value!.length < 8
+                            ? "Enter at least 6 characters"
+                            : null;
+                      },
+                      autovalidateMode: AutovalidateMode.disabled,
                       myController: password2_Controller,
                       keyboardTypee: TextInputType.visiblePassword,
                       hintTextt: "PASSWORD 2",

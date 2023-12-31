@@ -58,6 +58,10 @@ class LoginForm extends StatelessWidget {
                     color: const Color.fromARGB(255, 255, 255, 255)),
                 width: 300,
                 child: MyTextField(
+                    validator: (value) {
+                      return null;
+                    },
+                    autovalidateMode: AutovalidateMode.disabled,
                     myController: username_Controller,
                     keyboardTypee: TextInputType.emailAddress,
                     hintTextt: "USERNAME",
@@ -72,6 +76,10 @@ class LoginForm extends StatelessWidget {
                     color: Colors.white),
                 width: 300,
                 child: MyTextField(
+                    validator: (p0) {
+                      
+                    },
+                    autovalidateMode: AutovalidateMode.disabled,
                     myController: Password_Credential,
                     keyboardTypee: TextInputType.visiblePassword,
                     hintTextt: "Enter Your Password :",
