@@ -1,5 +1,6 @@
-// ignore_for_file: prefer_const_constructors, unused_local_variable
+// ignore_for_file: prefer_const_constructors, unused_local_variable, non_constant_identifier_names, use_build_context_synchronously
 
+import 'package:final_project_sce/shared/SnackBar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -36,12 +37,17 @@ class _SignUpState extends State<SignUp> {
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
+        // print('The password provided is too weak.');
+        showSnackBar(context, 'The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+        // print('The account already exists for that email.');
+        showSnackBar(context, 'The account already exists for that email.');
+      } else {
+        showSnackBar(context, 'ERROR - Please try again late.');
       }
     } catch (e) {
-      print(e);
+      // print(e);
+      showSnackBar(context, e.toString());
     }
     setState(() {
       isLoading = false;
@@ -142,8 +148,12 @@ class _SignUpState extends State<SignUp> {
                   backgroundColor: MaterialStateProperty.all(
                       Color.fromARGB(255, 0, 232, 159)),
                 ),
-                child: isLoading? CircularProgressIndicator(color: Colors.black,):Text("SignUp",
-                    style: TextStyle(fontSize: 25, color: Colors.black)),
+                child: isLoading
+                    ? CircularProgressIndicator(
+                        color: Colors.black,
+                      )
+                    : Text("SignUp",
+                        style: TextStyle(fontSize: 25, color: Colors.black)),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
