@@ -1,15 +1,22 @@
-// ignore_for_file: prefer_const_constructors, file_names, non_constant_identifier_names
+// ignore_for_file: prefer_const_constructors, file_names, non_constant_identifier_names, no_logic_in_create_state
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:email_validator/email_validator.dart';
 import '../shared/MyTextField.dart';
 
-class LoginForm extends StatelessWidget {
+class LoginForm extends StatefulWidget {
   LoginForm({super.key});
 
-  final username_Controller = TextEditingController();
+  @override
+  State<LoginForm> createState() => _LoginForm();
+}
+
+class _LoginForm extends State<LoginForm> {
+  final email_Controller = TextEditingController();
   final Password_Credential = TextEditingController();
+  bool isVisable = true;
 
   @override
   Widget build(BuildContext context) {
@@ -63,11 +70,12 @@ class LoginForm extends StatelessWidget {
                         return null;
                       },
                       autovalidateMode: AutovalidateMode.disabled,
-                      myController: username_Controller,
+                      myController: email_Controller,
                       keyboardTypee: TextInputType.emailAddress,
                       hintTextt: "USERNAME",
                       obscureText: false,
-                        suffixIcon: IconButton(onPressed: (){}, icon: Icon(Icons.person)) )),
+                      suffixIcon: IconButton(
+                          onPressed: () {}, icon: Icon(Icons.email)))),
               SizedBox(
                 height: 20,
               ),
@@ -82,9 +90,14 @@ class LoginForm extends StatelessWidget {
                       myController: Password_Credential,
                       keyboardTypee: TextInputType.visiblePassword,
                       hintTextt: "Enter Your Password :",
-                      obscureText: true,
+                      obscureText: isVisable ? true : false,
                       suffixIcon: IconButton(
-                          onPressed: () {}, icon: Icon(Icons.visibility)))),
+                          onPressed: () {
+                            setState(() {
+                              isVisable =! isVisable;
+                            });
+                          },
+                          icon: Icon(Icons.visibility)))),
               SizedBox(
                 height: 20,
               ),
