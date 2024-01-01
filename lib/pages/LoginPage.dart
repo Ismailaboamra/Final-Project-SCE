@@ -67,7 +67,7 @@ class LoginForm extends StatelessWidget {
                       keyboardTypee: TextInputType.emailAddress,
                       hintTextt: "USERNAME",
                       obscureText: false,
-                      prefixIcon: Icons.person)),
+                        suffixIcon: IconButton(onPressed: (){}, icon: Icon(Icons.person)) )),
               SizedBox(
                 height: 20,
               ),
@@ -77,23 +77,22 @@ class LoginForm extends StatelessWidget {
                       color: Colors.white),
                   width: 300,
                   child: MyTextField(
-                      validator: (p0) {
-                        
-                      },
+                      validator: (p0) {},
                       autovalidateMode: AutovalidateMode.disabled,
                       myController: Password_Credential,
                       keyboardTypee: TextInputType.visiblePassword,
                       hintTextt: "Enter Your Password :",
                       obscureText: true,
-                      prefixIcon: Icons.lock)),
+                      suffixIcon: IconButton(
+                          onPressed: () {}, icon: Icon(Icons.visibility)))),
               SizedBox(
                 height: 20,
               ),
               ElevatedButton(
                 onPressed: () {},
                 style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all(Color.fromARGB(255, 0, 232, 159)),
+                  backgroundColor: MaterialStateProperty.all(
+                      Color.fromARGB(255, 0, 232, 159)),
                 ),
                 child: Text("LogIn",
                     style: TextStyle(fontSize: 25, color: Colors.black)),

@@ -23,6 +23,8 @@ class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
 
   bool isLoading = false;
+  bool isVisable1 = true;
+  bool isVisable2 = true;
 
   // void Print_values() {
   SignUP() async {
@@ -108,9 +110,10 @@ class _SignUpState extends State<SignUp> {
                         autovalidateMode: AutovalidateMode.disabled,
                         myController: username_Controller,
                         keyboardTypee: TextInputType.name,
-                        hintTextt: "USERNAME",
+                        hintTextt: " USERNAME",
                         obscureText: false,
-                        prefixIcon: Icons.person)),
+                        suffixIcon: IconButton(
+                            onPressed: () {}, icon: Icon(Icons.person)))),
                 SizedBox(height: 20),
                 Container(
                     decoration: BoxDecoration(
@@ -129,9 +132,10 @@ class _SignUpState extends State<SignUp> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         myController: email_Controller,
                         keyboardTypee: TextInputType.emailAddress,
-                        hintTextt: "Email",
+                        hintTextt: " Email: eamil@exm.com",
                         obscureText: false,
-                        prefixIcon: Icons.email)),
+                        suffixIcon: IconButton(
+                            onPressed: () {}, icon: Icon(Icons.email)))),
                 SizedBox(height: 20),
                 Container(
                     decoration: BoxDecoration(
@@ -149,9 +153,15 @@ class _SignUpState extends State<SignUp> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         myController: password1_Controller,
                         keyboardTypee: TextInputType.visiblePassword,
-                        hintTextt: "PASSWORD 1",
-                        obscureText: true,
-                        prefixIcon: Icons.password)),
+                        hintTextt: " PASSWORD 1",
+                        obscureText: isVisable1 ? true : false,
+                        suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                isVisable1 = !isVisable1;
+                              });
+                            },
+                            icon: Icon(Icons.visibility)))),
                 SizedBox(height: 20),
                 Container(
                     decoration: BoxDecoration(
@@ -170,9 +180,13 @@ class _SignUpState extends State<SignUp> {
                         autovalidateMode: AutovalidateMode.disabled,
                         myController: password2_Controller,
                         keyboardTypee: TextInputType.visiblePassword,
-                        hintTextt: "PASSWORD 2",
-                        obscureText: true,
-                        prefixIcon: Icons.password)),
+                        hintTextt: " PASSWORD 2",
+                        obscureText: isVisable2 ? true : false,
+                        suffixIcon: IconButton(
+                            onPressed: () {
+                              isVisable2 = !isVisable2;
+                            },
+                            icon: Icon(Icons.visibility)))),
                 SizedBox(
                   height: 20,
                 ),
