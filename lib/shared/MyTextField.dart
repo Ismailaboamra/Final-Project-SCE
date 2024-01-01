@@ -25,6 +25,7 @@ class MyTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      
       autovalidateMode: autovalidateMode,
       validator: validator,
       controller: myController,

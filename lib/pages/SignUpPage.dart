@@ -37,19 +37,21 @@ class _SignUpState extends State<SignUp> {
         email: email_Controller.text,
         password: password1_Controller.text,
       );
+      showSnackBar(context, '   Done ...', Colors.green);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         // print('The password provided is too weak.');
-        showSnackBar(context, 'The password provided is too weak.');
+        showSnackBar(context, 'The password provided is too weak.', Colors.red);
       } else if (e.code == 'email-already-in-use') {
         // print('The account already exists for that email.');
-        showSnackBar(context, 'The account already exists for that email.');
+        showSnackBar(
+            context, 'The account already exists for that email.', Colors.red);
       } else {
-        showSnackBar(context, 'ERROR - Please try again late.');
+        showSnackBar(context, 'ERROR - Please try again late.', Colors.red);
       }
     } catch (e) {
       // print(e);
-      showSnackBar(context, e.toString());
+      showSnackBar(context, e.toString(), Colors.red);
     }
     setState(() {
       isLoading = false;
@@ -187,15 +189,12 @@ class _SignUpState extends State<SignUp> {
                               isVisable2 = !isVisable2;
                             },
                             icon: Icon(Icons.visibility)))),
-                SizedBox(
-                  height: 20,
-                ),
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       SignUP();
                     } else {
-                      showSnackBar(context, 'ERROR');
+                      showSnackBar(context, 'ERROR', Colors.red);
                     }
                   },
                   style: ButtonStyle(
