@@ -123,13 +123,11 @@ class _SignUpState extends State<SignUp> {
                         color: Color.fromARGB(179, 213, 213, 213)),
                     width: 350,
                     child: MyTextField(
-                        validator: (value) {
-                          if (value != null &&
-                              !EmailValidator.validate(value)) {
-                            return "   Enter a valid email";
-                          } else {
-                            return null;
-                          }
+                        validator: (email) {
+                          return email!.contains(RegExp(
+                                  r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))
+                              ? null
+                              : "Enter a valid email";
                         },
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         myController: email_Controller,
@@ -171,13 +169,12 @@ class _SignUpState extends State<SignUp> {
                         color: Color.fromARGB(179, 213, 213, 213)),
                     width: 350,
                     child: MyTextField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return '   Please confirm your password';
-                          } else if (value != password1_Controller.text) {
-                            return '   Passwords do not match';
+                      validator: (value) {
+                          if (value!.length < 8) {
+                            return "   Enter at least 8 characters";
+                          } else {
+                            return null;
                           }
-                          return null;
                         },
                         autovalidateMode: AutovalidateMode.disabled,
                         myController: password2_Controller,
@@ -186,7 +183,9 @@ class _SignUpState extends State<SignUp> {
                         obscureText: isVisable2 ? true : false,
                         suffixIcon: IconButton(
                             onPressed: () {
-                              isVisable2 = !isVisable2;
+                              setState(() {
+                                isVisable2 = !isVisable2;
+                              });
                             },
                             icon: Icon(Icons.visibility)))),
                 ElevatedButton(
