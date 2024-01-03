@@ -23,6 +23,11 @@ class _LoginForm extends State<LoginForm> {
   bool isVisable = true;
   SignIn() async {
     try {
+      if (email_Controller.text.isEmpty || password_Controller.text.isEmpty) {
+        // Display error if email or password is empty
+        showSnackBar(context, 'Email OR password are required.', Colors.red);
+        return;
+      }
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email_Controller.text, password: password_Controller.text);
       Navigator.push(
@@ -35,10 +40,14 @@ class _LoginForm extends State<LoginForm> {
         showSnackBar(context, 'No user found for that email.', Colors.red);
       } else if (e.code == 'wrong-password') {
         showSnackBar(
-            context, 'Wrong password provided for that user.', Colors.red);
+            context, 'Incorrect password. Please try again.', Colors.red);
       } else {
-        showSnackBar(context, "  Error - Try Again.", Colors.red);
+        // Handle other Firebase Authentication exceptions
+        showSnackBar(context, 'An error occurred: ${e.message}', Colors.red);
       }
+    } catch (e) {
+      // Handle other exceptions
+      showSnackBar(context, 'An unexpected error occurred: $e', Colors.red);
     }
   }
 
@@ -53,20 +62,6 @@ class _LoginForm extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color.fromARGB(255, 248, 248, 248),
-        onPressed: () {
-          Navigator.pushNamed(context, '/LoginForm');
-        },
-        child: IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/LoginForm');
-            },
-            icon: Icon(
-              Icons.home,
-              color: Colors.black,
-            )),
-      ),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 0, 232, 159),
         elevation: 15,
@@ -101,10 +96,10 @@ class _LoginForm extends State<LoginForm> {
                     width: 300,
                     child: MyTextField(
                         validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter a email';
-                          }
-                          return null;
+                          return value!.contains(RegExp(
+                                  r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))
+                              ? null
+                              : "Enter a valid email";
                         },
                         autovalidateMode: AutovalidateMode.disabled,
                         myController: email_Controller,
