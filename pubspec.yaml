@@ -35,6 +35,8 @@ dependencies:
   firebase_core: ^2.0.0
   firebase_auth: ^4.0.0  # Add any other Firebase libraries you need
   email_validator: ^2.1.17
+  provider: ^6.1.1
+
 
 
 
