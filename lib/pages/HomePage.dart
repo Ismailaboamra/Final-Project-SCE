@@ -1,9 +1,23 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last, non_constant_identifier_names
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
+
+  SignOut() {
+    FirebaseAuth.instance.signOut();
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user == null) {
+        // User is signed out
+        print('User is signed out');
+      } else {
+        // User is signed in
+        print('User is signed in');
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +31,7 @@ class HomePage extends StatelessWidget {
                 UserAccountsDrawerHeader(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage("assets/img/SCE_img.jpg"),
+                        image: AssetImage("assets/img/horse.jpg"),
                         fit: BoxFit.cover),
                   ),
                   accountName: Text("zz@zz.com",
@@ -28,7 +42,7 @@ class HomePage extends StatelessWidget {
                   currentAccountPictureSize: Size.square(99),
                   currentAccountPicture: CircleAvatar(
                       radius: 55,
-                      backgroundImage: AssetImage("assets/img/SCE_img.jpg")),
+                      backgroundImage: AssetImage("assets/img/horse.jpg")),
                 ),
                 ListTile(
                     title: Text("Home"),
@@ -45,7 +59,9 @@ class HomePage extends StatelessWidget {
                 ListTile(
                     title: Text("Logout"),
                     leading: Icon(Icons.exit_to_app),
-                    onTap: () {}),
+                    onTap: () {
+                      SignOut();
+                    }),
               ],
             ),
             Container(
