@@ -3,7 +3,6 @@
 import 'package:final_project_sce/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
 import 'pages/HomePage.dart';
 import 'pages/LoginPage.dart';
 import 'pages/SignUpPage.dart';
