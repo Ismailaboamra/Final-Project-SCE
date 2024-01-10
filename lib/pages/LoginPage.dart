@@ -31,10 +31,10 @@ class _LoginForm extends State<LoginForm> {
       }
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email_Controller.text, password: password_Controller.text);
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(builder: (context) => HomePage()),
-      // );
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
       showSnackBar(context, '   Done ...', Colors.green);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {

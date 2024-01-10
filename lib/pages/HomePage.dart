@@ -1,16 +1,27 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, non_constant_identifier_names
 
+import 'package:final_project_sce/pages/LoginPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   SignOut() {
     FirebaseAuth.instance.signOut();
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user == null) {
         // User is signed out
+        Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => LoginForm()),
+      );
+        
         print('User is signed out');
       } else {
         // User is signed in

@@ -70,12 +70,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Color.fromARGB(255, 0, 232, 159),
-        onPressed: () {
-          Navigator.pushNamed(context, '/');
-        },
-      ),
+
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 0, 232, 159),
         elevation: 10,
