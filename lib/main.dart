@@ -27,18 +27,19 @@ class MyApp extends StatelessWidget {
         return;
       },
       child: MaterialApp(
-          title: "myApp",
-          debugShowCheckedModeBanner: false,
-          home: StreamBuilder(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return HomePage();
-              } else {
-                return LoginForm();
-              }
-            },
-          )),
+        title: "myApp",
+        debugShowCheckedModeBanner: false,
+        home: StreamBuilder(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return HomePage();
+            } else {
+              return LoginForm();
+            }
+          },
+        ),
+      ),
     );
     // return MaterialApp(
     //   debugShowCheckedModeBanner: false,
