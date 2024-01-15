@@ -20,8 +20,8 @@ class _LoginForm extends State<LoginForm> {
   final email_Controller = TextEditingController();
   final password_Controller = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-
   bool isVisable = true;
+  
   SignIn() async {
     try {
       if (email_Controller.text.isEmpty || password_Controller.text.isEmpty) {
@@ -68,6 +68,7 @@ class _LoginForm extends State<LoginForm> {
         elevation: 15,
         title: Text("LogIn Page"),
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Form(
