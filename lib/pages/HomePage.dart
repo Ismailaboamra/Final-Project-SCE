@@ -1,8 +1,9 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last, non_constant_identifier_names
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last, non_constant_identifier_names, unnecessary_this, unused_import
 
 import 'package:final_project_sce/pages/LoginPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,16 +13,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final String? email = FirebaseAuth.instance.currentUser?.email.toString();
   SignOut() {
     FirebaseAuth.instance.signOut();
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user == null) {
         // User is signed out
         Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => LoginForm()),
-      );
-        
+          context,
+          MaterialPageRoute(builder: (context) => LoginForm()),
+        );
+
         print('User is signed out');
       } else {
         // User is signed in
@@ -45,11 +47,11 @@ class _HomePageState extends State<HomePage> {
                         image: AssetImage("assets/img/horse.jpg"),
                         fit: BoxFit.cover),
                   ),
-                  accountName: Text("zz@zz.com",
+                  accountName: Text(email.toString(),
                       style: TextStyle(
                         color: Color.fromARGB(255, 255, 255, 255),
                       )),
-                  accountEmail: Text("xy"),
+                  accountEmail: Text(""),
                   currentAccountPictureSize: Size.square(99),
                   currentAccountPicture: CircleAvatar(
                       radius: 55,

@@ -76,6 +76,7 @@ class _SignUpState extends State<SignUp> {
         elevation: 10,
         title: Text("SignUp Page"),
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Form(
