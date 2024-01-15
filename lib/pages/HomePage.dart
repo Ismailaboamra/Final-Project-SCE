@@ -44,31 +44,26 @@ class _HomePageState extends State<HomePage> {
                 UserAccountsDrawerHeader(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage("assets/img/horse.jpg"),
+                        image: AssetImage("assets/img/SCE_img.jpg"),
                         fit: BoxFit.cover),
                   ),
-                  accountName: Text(email.toString(),
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255),
-                      )),
-                  accountEmail: Text(""),
+                  accountName: Text(
+                    "",
+                  ),
+                  accountEmail: Text(
+                    email.toString(),
+                    style: TextStyle(color: Colors.black, fontSize: 25),
+                  ),
                   currentAccountPictureSize: Size.square(99),
                   currentAccountPicture: CircleAvatar(
                       radius: 55,
-                      backgroundImage: AssetImage("assets/img/horse.jpg")),
+                      backgroundImage: AssetImage("assets/img/download.png")),
                 ),
                 ListTile(
                     title: Text("Home"),
                     leading: Icon(Icons.home),
                     onTap: () {}),
-                ListTile(
-                    title: Text("My products"),
-                    leading: Icon(Icons.add_shopping_cart),
-                    onTap: () {}),
-                ListTile(
-                    title: Text("About"),
-                    leading: Icon(Icons.help_center),
-                    onTap: () {}),
+                
                 ListTile(
                     title: Text("Logout"),
                     leading: Icon(Icons.exit_to_app),
