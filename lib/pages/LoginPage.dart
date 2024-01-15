@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, file_names, non_constant_identifier_names, no_logic_in_create_state, unused_local_variable, prefer_const_constructors_in_immutables, unused_import, use_build_context_synchronously
 
 import 'package:final_project_sce/pages/HomePage.dart';
+import 'package:final_project_sce/pages/SignUpPage.dart';
 import 'package:final_project_sce/shared/SnackBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -30,10 +31,10 @@ class _LoginForm extends State<LoginForm> {
       }
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email_Controller.text, password: password_Controller.text);
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(builder: (context) => HomePage()),
-      // );
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
       showSnackBar(context, '   Done ...', Colors.green);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -164,7 +165,10 @@ class _LoginForm extends State<LoginForm> {
                     ),
                     TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/SignUp');
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignUp()));
                         },
                         child: Text(
                           "SignUp",

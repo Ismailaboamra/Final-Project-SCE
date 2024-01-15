@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, unused_local_variable, non_constant_identifier_names, use_build_context_synchronously, unused_import, unused_field
 
+import 'package:final_project_sce/pages/LoginPage.dart';
 import 'package:final_project_sce/shared/SnackBar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:email_validator/email_validator.dart';
@@ -69,12 +70,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Color.fromARGB(255, 0, 232, 159),
-        onPressed: () {
-          Navigator.pushNamed(context, '/');
-        },
-      ),
+
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 0, 232, 159),
         elevation: 10,
@@ -169,7 +165,7 @@ class _SignUpState extends State<SignUp> {
                         color: Color.fromARGB(179, 213, 213, 213)),
                     width: 350,
                     child: MyTextField(
-                      validator: (value) {
+                        validator: (value) {
                           if (value!.length < 8) {
                             return "   Enter at least 8 characters";
                           } else {
@@ -216,7 +212,10 @@ class _SignUpState extends State<SignUp> {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, '/LoginForm');
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginForm()));
                       },
                       child: Text(
                         "LogIn",
