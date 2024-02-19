@@ -3,6 +3,8 @@
 import 'package:final_project_sce/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:final_project_sce/responsive/mobile.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'pages/HomePage.dart';
@@ -29,16 +31,17 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: "myApp",
         debugShowCheckedModeBanner: false,
-        home: StreamBuilder(
-          stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return HomePage();
-            } else {
-              return LoginForm();
-            }
-          },
-        ),
+        home: MobileScreen(),
+        // home: StreamBuilder(
+        //   stream: FirebaseAuth.instance.authStateChanges(),
+        //   builder: (context, snapshot) {
+        //     // if (snapshot.hasData) {
+        //     //   return HomePage();
+        //     // } else {
+        //     //   return LoginForm();
+        //     // }
+        //   },
+        // ),
       ),
     );
 
