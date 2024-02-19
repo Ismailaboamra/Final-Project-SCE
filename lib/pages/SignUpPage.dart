@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unused_local_variable, non_constant_identifier_names, use_build_context_synchronously, unused_import, unused_field
+// ignore_for_file: prefer_const_constructors, unused_local_variable, non_constant_identifier_names, use_build_context_synchronously, unused_import, unused_field, file_names, prefer_const_constructors_in_immutables
 
 import 'package:final_project_sce/pages/LoginPage.dart';
 import 'package:final_project_sce/shared/SnackBar.dart';
@@ -70,7 +70,6 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 0, 232, 159),
         elevation: 10,

@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, unused_field
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, unused_field, file_names
 
 import 'package:flutter/material.dart';
 
@@ -25,7 +25,6 @@ class MyTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      
       autovalidateMode: autovalidateMode,
       validator: validator,
       controller: myController,
@@ -36,7 +35,6 @@ class MyTextField extends StatelessWidget {
           focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Color.fromARGB(255, 0, 232, 159))),
           suffixIcon: suffixIcon,
-          
           hintText: hintTextt,
           hintStyle: TextStyle(fontSize: 19),
           border: InputBorder.none),
