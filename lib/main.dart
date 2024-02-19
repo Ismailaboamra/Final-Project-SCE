@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import, prefer_const_constructors, sort_child_properties_last
+// ignore_for_file: unused_import, prefer_const_constructors, sort_child_properties_last, use_super_parameters
 
 import 'package:final_project_sce/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
     );
-    
+
     // return MaterialApp(
     //   debugShowCheckedModeBanner: false,
     //   theme: ThemeData.light(useMaterial3: true),
