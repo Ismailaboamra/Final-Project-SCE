@@ -2,7 +2,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/Cupertino.dart';
+// import 'package:sce_mentor/screens/alerts.dart';
+// import 'package:sce_mentor/screens/home.dart';
+// import 'package:sce_mentor/screens/lessons.dart';
+// import 'package:sce_mentor/screens/myProfile.dart';
 import 'package:final_project_sce/shared/colors.dart';
+
+import 'package:final_project_sce/screens/home.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
+// PROJECT\Final-Project-SCE\shared\colors.dart
 
 class MobileScreen extends StatefulWidget {
   const MobileScreen({super.key});
@@ -50,10 +58,15 @@ class _MobileScreenState extends State<MobileScreen> {
           ],
         ),
         body: PageView(
-          onPageChanged: (index) {},
+          // onPageChanged: (index) {},
           physics: NeverScrollableScrollPhysics(),
           controller: _pageController,
-          children: [],
+          children: [
+            Home(),
+            // Lessons(),
+            // Alerts(),
+            // myProfile(),
+          ],
         ));
   }
 }
