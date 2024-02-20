@@ -15,16 +15,15 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: SvgPicture.asset('assets/icons/sceMentor.svg', height: 24),
-        actions: [
-          IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.messenger_outline,
-              )),
-        ],
-      ),
-    );
+        appBar: AppBar(
+      title: SvgPicture.asset('assets/icons/sceMentor.svg', height: 24),
+      actions: [
+        IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.messenger_outline,
+            )),
+      ],
+    ));
   }
 }
