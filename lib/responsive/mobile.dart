@@ -68,7 +68,7 @@ class _MobileScreenState extends State<MobileScreen> {
           children: [
             Home(),
             Lessons(),
-            // Alerts(),
+            Alerts(),
             // myProfile(),
           ],
         ));
