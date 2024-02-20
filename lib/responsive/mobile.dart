@@ -9,6 +9,10 @@ import 'package:flutter/Cupertino.dart';
 import 'package:final_project_sce/shared/colors.dart';
 
 import 'package:final_project_sce/screens/home.dart';
+
+import 'package:final_project_sce/screens/alerts.dart';
+import 'package:final_project_sce/screens/lessons.dart';
+import 'package:final_project_sce/screens/myProfile.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
 // PROJECT\Final-Project-SCE\shared\colors.dart
 
@@ -63,7 +67,7 @@ class _MobileScreenState extends State<MobileScreen> {
           controller: _pageController,
           children: [
             Home(),
-            // Lessons(),
+            Lessons(),
             // Alerts(),
             // myProfile(),
           ],
