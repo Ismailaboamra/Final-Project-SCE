@@ -110,7 +110,7 @@ class _myProfileState extends State<myProfile> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
+            margin: EdgeInsets.fromLTRB(30, 20, 20, 0),
             child: Row(
               children: [
                 IconButton(
