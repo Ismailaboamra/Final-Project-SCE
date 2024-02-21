@@ -119,6 +119,12 @@ class _myProfileState extends State<myProfile> {
                       'assets/icons/request.png',
                       height: 40,
                     )),
+                IconButton(
+                    onPressed: () {},
+                    icon: Image.asset(
+                      'assets/icons/edit.png',
+                      height: 40,
+                    )),
               ],
             ),
           )
