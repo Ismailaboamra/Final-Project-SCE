@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, camel_case_types, prefer_const_constructors
+// ignore_for_file: file_names, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -100,6 +100,13 @@ class _myProfileState extends State<myProfile> {
                 ],
               ),
             ]),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
+            child: Text(
+              "There is nothing that stands in the way of desire - a software engineering student, with experience in giving private lessons, giving lessons in physics and Hadva1.",
+              style: TextStyle(color: secondaryColor),
+            ),
           )
         ],
       ),
