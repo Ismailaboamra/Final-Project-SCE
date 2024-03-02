@@ -31,17 +31,17 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: "myApp",
         debugShowCheckedModeBanner: false,
-        home: MobileScreen(),
-        // home: StreamBuilder(
-        //   stream: FirebaseAuth.instance.authStateChanges(),
-        //   builder: (context, snapshot) {
-        //     if (snapshot.hasData) {
-        //       return MobileScreen();
-        //     } else {
-        //       return LoginForm();
-        //     }
-        //   },
-        // ),
+        // home: MobileScreen(),
+        home: StreamBuilder(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return MobileScreen();
+            } else {
+              return LoginForm();
+            }
+          },
+        ),
       ),
     );
 
