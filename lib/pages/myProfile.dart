@@ -21,6 +21,7 @@ class _myProfileState extends State<myProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: SvgPicture.asset('assets/icons/sceMentor.svg', height: 24),
         actions: [
           IconButton(
@@ -29,7 +30,7 @@ class _myProfileState extends State<myProfile> {
                     FirebaseAuth.instance.authStateChanges().listen((User? user) {
                     if (user == null) {
                    // User is signed out
-                    Navigator.push(  context,MaterialPageRoute(builder: (context) => LoginForm()),);
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => LoginForm()),);
                     print('User is signed out');
                     } else {
                     // User is signed in 
