@@ -24,6 +24,7 @@ class _MobileScreenState extends State<MobileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         bottomNavigationBar: CupertinoTabBar(
+          
           onTap: (index) {
             _pageController.jumpToPage(index);
             setState(() {

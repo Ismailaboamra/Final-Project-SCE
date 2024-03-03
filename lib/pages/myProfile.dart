@@ -1,5 +1,7 @@
 // ignore_for_file: file_names, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:final_project_sce/pages/LoginPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/Cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -13,6 +15,8 @@ class myProfile extends StatefulWidget {
 }
 
 class _myProfileState extends State<myProfile> {
+    final String? email = FirebaseAuth.instance.currentUser?.email.toString();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,9 +24,19 @@ class _myProfileState extends State<myProfile> {
         title: SvgPicture.asset('assets/icons/sceMentor.svg', height: 24),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                    FirebaseAuth.instance.signOut();
+                    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+                    if (user == null) {
+                   // User is signed out
+                    Navigator.push(  context,MaterialPageRoute(builder: (context) => LoginForm()),);
+                    print('User is signed out');
+                    } else {
+                    // User is signed in 
+                     print('User is signed in');
+                     }});},
               icon: Icon(
-                Icons.settings,
+                Icons.exit_to_app,
               )),
         ],
       ),
@@ -89,7 +103,7 @@ class _myProfileState extends State<myProfile> {
                     child: Container(
                       margin: EdgeInsets.fromLTRB(40, 8, 0, 0),
                       child: Text(
-                        "Bhaa Alden Aldda",
+                        email.toString(),
                         style: TextStyle(
                           fontSize: 18,
                           color: primaryColor,
