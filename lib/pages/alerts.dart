@@ -15,6 +15,7 @@ class _AlertsState extends State<Alerts> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: SvgPicture.asset('assets/icons/sceMentor.svg', height: 24),
         actions: [
           IconButton(
@@ -24,7 +25,9 @@ class _AlertsState extends State<Alerts> {
               )),
         ],
       ),
+
       body: AppBar(
+        automaticallyImplyLeading: false,
         title: SvgPicture.asset('assets/icons/alerts.svg', height: 18),
       ),
     );
