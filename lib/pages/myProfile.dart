@@ -15,7 +15,7 @@ class myProfile extends StatefulWidget {
 }
 
 class _myProfileState extends State<myProfile> {
-    final String? email = FirebaseAuth.instance.currentUser?.email.toString();
+  final String? email = FirebaseAuth.instance.currentUser?.email.toString();
 
   @override
   Widget build(BuildContext context) {
@@ -26,18 +26,22 @@ class _myProfileState extends State<myProfile> {
         actions: [
           IconButton(
               onPressed: () {
-                    FirebaseAuth.instance.signOut();
-                    FirebaseAuth.instance.authStateChanges().listen((User? user) {
-                    if (user == null) {
-                   // User is signed out
-                    Navigator.push(context,MaterialPageRoute(builder: (context) => LoginForm()),);
+                FirebaseAuth.instance.signOut();
+                FirebaseAuth.instance.authStateChanges().listen((User? user) {
+                  if (user == null) {
+                    // User is signed out
+                    // Navigator.push(context,MaterialPageRoute(builder: (context) => LoginForm()),);
+                    Navigator.pop(context);
                     print('User is signed out');
-                    } else {
-                    // User is signed in 
-                     print('User is signed in');
-                     }});},
+                  } else {
+                    // User is signed in
+                    print('User is signed in');
+                  }
+                });
+              },
               icon: Icon(
                 Icons.exit_to_app,
+                size: 35,
               )),
         ],
       ),
@@ -45,7 +49,7 @@ class _myProfileState extends State<myProfile> {
         children: [
           Container(
             margin: EdgeInsets.fromLTRB(20, 20, 0, 0),
-            child: SvgPicture.asset('assets/icons/myProfile.svg', height: 18),
+            child: SvgPicture.asset('assets/icons/myProfile.svg', height: 20),
           ),
           Container(
             height: 120,
@@ -142,6 +146,20 @@ class _myProfileState extends State<myProfile> {
                     )),
               ],
             ),
+          ),
+          SizedBox(height: 30,),
+          Container(
+      
+            alignment: Alignment.centerLeft,
+            child: Row(
+            
+              children: [
+                Text("Email : ",style: TextStyle(fontSize: 25),),
+                Text(email.toString(),style: TextStyle(fontSize: 20),)
+
+              ],
+            ),
+
           )
         ],
       ),
