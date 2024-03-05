@@ -16,6 +16,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: SvgPicture.asset('assets/icons/sceMentor.svg', height: 24),
         actions: [
           IconButton(

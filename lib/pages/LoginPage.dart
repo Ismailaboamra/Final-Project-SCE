@@ -2,6 +2,9 @@
 
 import 'package:final_project_sce/pages/HomePage.dart';
 import 'package:final_project_sce/pages/SignUpPage.dart';
+import 'package:final_project_sce/pages/home.dart';
+import 'package:final_project_sce/pages/myProfile.dart';
+import 'package:final_project_sce/responsive/mobile.dart';
 import 'package:final_project_sce/shared/SnackBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -33,7 +36,7 @@ class _LoginForm extends State<LoginForm> {
           email: email_Controller.text, password: password_Controller.text);
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(builder: (context) => MobileScreen()),
       );
       showSnackBar(context, '   Done ...', Colors.green);
     } on FirebaseAuthException catch (e) {
