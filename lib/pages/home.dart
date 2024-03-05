@@ -71,105 +71,109 @@ class _HomeState extends State<Home> {
             SizedBox(
               height: 20,
             ),
-            Row(
-              children: [
-                Column(
-                  children: [
-                    Container(
-                      height: 120,
-                      width: 120,
-                      margin: EdgeInsets.fromLTRB(23, 23, 23, 5),
-                      child: CircleAvatar(
-                        radius: 24,
-                        backgroundImage: NetworkImage(
-                            "https://images.pexels.com/photos/2820884/pexels-photo-2820884.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-                      ),
-                    ),
-                    Container(
-                      // color: Colors.amber,
-                      margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                      child: Text(
-                        "Bhaa Aldda",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: primaryColor,
-                          fontWeight: FontWeight.bold,
+            SingleChildScrollView(
+              child: Row(
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        height: 120,
+                        width: 120,
+                        margin: EdgeInsets.fromLTRB(23, 23, 23, 5),
+                        child: CircleAvatar(
+                          radius: 24,
+                          backgroundImage: NetworkImage(
+                              "https://images.pexels.com/photos/2820884/pexels-photo-2820884.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
                         ),
                       ),
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
+                      Container(
                         // color: Colors.amber,
-                        margin: EdgeInsets.fromLTRB(10, 0, 0, 10),
+                        margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
                         child: Text(
-                          "see all 10 courses he mentors",
-                          // textAlign: TextAlign.end,
+                          "Bhaa Aldda",
                           style: TextStyle(
-                            fontSize: 13,
-                            color: secondaryColor,
+                            fontSize: 20,
+                            color: primaryColor,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                    ),
-                    Stack(
-                      children: [
-                        Container(
-                          height: 50,
-                          width: 200,
-                          margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage('assets/img/background3.png'),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          // color: Colors.amber,
+                          margin: EdgeInsets.fromLTRB(10, 0, 0, 10),
+                          child: Text(
+                            "see all 10 courses he mentors",
+                            // textAlign: TextAlign.end,
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: secondaryColor,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
-                        Align(
-                          child: Container(
-                            height: 40,
-                            margin: EdgeInsets.fromLTRB(25, 0, 0, 0),
-                            child: Row(
-                              children: [
-                                IconButton(
-                                    onPressed: () {},
-                                    icon: Image.asset('assets/icons/like.png')),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Align(
-                          child: Container(
-                            // color: Colors.amber,
-                            margin: EdgeInsets.fromLTRB(60, 10, 0, 0),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "1251",
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Align(
-                          child: Container(
-                            margin: EdgeInsets.fromLTRB(170, 0, 0, 0),
-                            child: IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.messenger_outline,
+                      ),
+                      Stack(
+                        children: [
+                          Container(
+                            height: 50,
+                            width: 200,
+                            margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: AssetImage('assets/img/background3.png'),
                               ),
                             ),
                           ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                          Align(
+                            child: Container(
+                              height: 40,
+                              margin: EdgeInsets.fromLTRB(25, 0, 0, 0),
+                              child: Row(
+                                children: [
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon:
+                                          Image.asset('assets/icons/like.png')),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Align(
+                            child: Container(
+                              // color: Colors.amber,
+                              margin: EdgeInsets.fromLTRB(60, 10, 0, 0),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "1251",
+                                    style: TextStyle(fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Align(
+                            child: Container(
+                              margin: EdgeInsets.fromLTRB(170, 0, 0, 0),
+                              child: IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.messenger_outline,
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+                
+              ),
+            )
           ],
         ),
       ),
