@@ -127,7 +127,48 @@ class _myProfileState extends State<myProfile> {
                     )),
               ],
             ),
-          )
+          ),
+          Container(
+              margin: EdgeInsets.fromLTRB(20, 50, 20, 0),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal, // تحديد الاتجاه الأفقي
+
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                        onPressed: () {},
+                        icon: Image.asset(
+                          'assets/icons/diary.png',
+                          height: 100,
+                        )),
+                    IconButton(
+                        onPressed: () {},
+                        icon: Image.asset(
+                          'assets/icons/comments.png',
+                          height: 100,
+                        )),
+                    IconButton(
+                        onPressed: () {},
+                        icon: Image.asset(
+                          'assets/icons/rating.png',
+                          height: 100,
+                        )),
+                    IconButton(
+                        onPressed: () {},
+                        icon: Image.asset(
+                          'assets/icons/rating.png',
+                          height: 100,
+                        )),
+                    IconButton(
+                        onPressed: () {},
+                        icon: Image.asset(
+                          'assets/icons/rating.png',
+                          height: 100,
+                        )),
+                  ],
+                ),
+              ))
         ],
       ),
     );
