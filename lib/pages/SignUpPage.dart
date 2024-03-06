@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, unused_local_variable, non_constant_identifier_names, use_build_context_synchronously, unused_import, unused_field, file_names, prefer_const_constructors_in_immutables
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_project_sce/pages/LoginPage.dart';
 import 'package:final_project_sce/shared/SnackBar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -29,6 +30,7 @@ class _SignUpState extends State<SignUp> {
 
   // void Print_values() {
   SignUP() async {
+
     setState(() {
       isLoading = true;
     });
@@ -38,6 +40,13 @@ class _SignUpState extends State<SignUp> {
         email: email_Controller.text,
         password: password1_Controller.text,
       );
+      CollectionReference users =
+          FirebaseFirestore.instance.collection("userss");
+      users
+          .doc('USER : ' + username_Controller.text)
+          .set({'Username':username_Controller.text, 'email': email_Controller.text,  'password':password1_Controller.text})
+          .then((value) => print("User Added"))
+          .catchError((error) => print("Failed to add user: $error"));
       showSnackBar(context, '   Done ...', Colors.green);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
