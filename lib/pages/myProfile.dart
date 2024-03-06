@@ -1,7 +1,9 @@
-// ignore_for_file: file_names, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_import, unnecessary_import, avoid_print
+// ignore_for_file: file_names, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_import, unnecessary_import, avoid_print, unused_local_variable
 
+import 'package:final_project_sce/getUsersFromFiresore.dart';
 import 'package:final_project_sce/pages/LoginPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/Cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -16,6 +18,9 @@ class myProfile extends StatefulWidget {
 
 class _myProfileState extends State<myProfile> {
   final String? email = FirebaseAuth.instance.currentUser?.email.toString();
+  final User? currectUser = FirebaseAuth.instance.currentUser;
+  UserData userData = new UserData(uid: FirebaseAuth.instance.currentUser!.uid, fieldName: 'Username',data:"");
+
 
   @override
   Widget build(BuildContext context) {
@@ -107,8 +112,9 @@ class _myProfileState extends State<myProfile> {
                   Align(
                     child: Container(
                       margin: EdgeInsets.fromLTRB(40, 8, 0, 0),
+                      // child: UserData(uid: currectUser!.uid, fieldName: 'Username'),
                       child: Text(
-                        email.toString(),
+                      userData.getData(),
                         style: TextStyle(
                           fontSize: 18,
                           color: primaryColor,
