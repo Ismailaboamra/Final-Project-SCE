@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: file_names, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_import, unnecessary_import, avoid_print
 
 import 'package:final_project_sce/pages/LoginPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -150,8 +150,7 @@ class _myProfileState extends State<myProfile> {
           Container(
               margin: EdgeInsets.fromLTRB(20, 50, 20, 0),
               child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal, // تحديد الاتجاه الأفقي
-
+                scrollDirection: Axis.horizontal,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -189,20 +188,22 @@ class _myProfileState extends State<myProfile> {
                 ),
               )),
 
-          SizedBox(height: 30,),
-          Container(
-      
-            alignment: Alignment.centerLeft,
-            child: Row(
-            
-              children: [
-                Text("Email : ",style: TextStyle(fontSize: 25),),
-                Text(email.toString(),style: TextStyle(fontSize: 20),)
+          SizedBox(
+            height: 30,
+          ),
+          // Container(
 
-              ],
-            ),
+          //   alignment: Alignment.centerLeft,
+          //   child: Row(
 
-          )
+          //     children: [
+          //       Text("Email : ",style: TextStyle(fontSize: 25),),
+          //       Text(email.toString(),style: TextStyle(fontSize: 20),)
+
+          //     ],
+          //   ),
+
+          // )
         ],
       ),
     );
