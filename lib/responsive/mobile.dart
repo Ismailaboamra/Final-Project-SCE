@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/Cupertino.dart';
 import 'package:final_project_sce/shared/colors.dart';
 
-
 class MobileScreen extends StatefulWidget {
   const MobileScreen({super.key});
 
@@ -24,7 +23,6 @@ class _MobileScreenState extends State<MobileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         bottomNavigationBar: CupertinoTabBar(
-          
           onTap: (index) {
             _pageController.jumpToPage(index);
             setState(() {

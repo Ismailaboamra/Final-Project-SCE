@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unused_local_variable, non_constant_identifier_names, use_build_context_synchronously, unused_import, unused_field, file_names, prefer_const_constructors_in_immutables
+// ignore_for_file: prefer_const_constructors, unused_local_variable, non_constant_identifier_names, use_build_context_synchronously, unused_import, unused_field, file_names, prefer_const_constructors_in_immutables, prefer_interpolation_to_compose_strings, avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_project_sce/pages/LoginPage.dart';
