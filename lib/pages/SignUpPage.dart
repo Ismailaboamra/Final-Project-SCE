@@ -43,7 +43,7 @@ class _SignUpState extends State<SignUp> {
       CollectionReference users =
           FirebaseFirestore.instance.collection("userss");
       users
-          .doc('USER : ' + username_Controller.text)
+          .doc('User : ' + FirebaseAuth.instance.currentUser!.uid.toString())
           .set({'Username':username_Controller.text, 'email': email_Controller.text,  'password':password1_Controller.text})
           .then((value) => print("User Added"))
           .catchError((error) => print("Failed to add user: $error"));
