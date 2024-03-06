@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import, prefer_const_constructors, sort_child_properties_last, use_super_parameters
 
 import 'package:final_project_sce/firebase_options.dart';
+import 'package:final_project_sce/responsive/mobileOfmentor.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:final_project_sce/responsive/mobile.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return MobileScreen();
+              return MobileScreenMentor();
             } else {
               return LoginForm();
             }
