@@ -57,7 +57,7 @@ class UserData {
   String getData() {
     getUserDataField(uid, fieldName);
     print(data);
-    return fieldName+" : "+  data;
+    return fieldName+" : "+  data.toString();
   }
 
 }
