@@ -2,85 +2,100 @@
 
 import 'package:flutter/material.dart';
 
-class AddLesson extends StatefulWidget {
+class LessonRequestForm  extends StatefulWidget {
   @override
   _AddLessonPageState createState() => _AddLessonPageState();
 }
 
-class _AddLessonPageState extends State<AddLesson> {
-  String _selectedDay = 'Monday';
-  TimeOfDay _startTime = TimeOfDay.now();
-  TimeOfDay _endTime = TimeOfDay.now();
+class _AddLessonPageState extends State<LessonRequestForm > {
+  String? selectedCourse;
+  List<String> courses = [
+    'Course A',
+    'Course B',
+    'Course C'
+  ]; // Replace with your actual course list
+  Map<String, bool> selectedDays = {
+    'Sunday': false,
+    'Monday': false,
+    'Tuesday': false,
+    'Wednesday': false,
+    'Thursday': false,
+    'Friday': false,
+  };
+  RangeValues timeRange = const RangeValues(8, 24);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Lesson Time'),
+        
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
+      body: Container(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            DropdownButtonFormField(
-              value: _selectedDay,
-              items: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
-                  .map((day) => DropdownMenuItem(value: day, child: Text(day)))
-                  .toList(),
+            SizedBox(height: 40,),
+            DropdownButtonFormField<String>(
+              decoration: InputDecoration(
+                labelText: 'Select Course',
+              ),
+              value: selectedCourse,
               onChanged: (value) {
                 setState(() {
-                  _selectedDay = value.toString();
+                  selectedCourse = value;
                 });
               },
+              items: courses.map((course) {
+                return DropdownMenuItem<String>(
+                  value: course,
+                  child: Text(course),
+                );
+              }).toList(),
             ),
-            SizedBox(height: 16.0),
-            Text('Start Time'),
+            SizedBox(height: 20),
+            Text('Select Days:'),
+            SizedBox(height: 10),
+            Column(
+              children: selectedDays.entries.map((entry) {
+                return CheckboxListTile(
+                  title: Text(entry.key),
+                  value: entry.value,
+                  onChanged: (value) {
+                    setState(() {
+                      selectedDays[entry.key] = value!;
+                    });
+                  },
+                );
+              }).toList(),
+            ),
+            SizedBox(height: 20),
+            Text('Select Time Range:'),
+            RangeSlider(
+              values: timeRange,
+              onChanged: (values) {
+                setState(() {
+                  timeRange = values;
+                });
+              },
+              min: 0,
+              max: 24,
+              divisions: 24,
+              labels: RangeLabels('${timeRange.start}', '${timeRange.end}'),
+            ),
+            SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                _selectStartTime(context);
+                // Handle the request submission here
+                print('Course: $selectedCourse');
+                print('Selected Days: $selectedDays');
+                print('Time Range: ${timeRange.start} - ${timeRange.end}');
               },
-              child: Text(_startTime.format(context)),
-            ),
-            SizedBox(height: 16.0),
-            Text('End Time'),
-            ElevatedButton(
-              onPressed: () {
-                _selectEndTime(context);
-              },
-              child: Text(_endTime.format(context)),
-            ),
-            SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: () {
-                // Save lesson time to Firebase
-                // Implement Firebase logic here
-              },
-              child: Text('Save Lesson Time'),
+              child: Text('Request Lesson'),
             ),
           ],
         ),
       ),
     );
-  }
-
-  Future<void> _selectStartTime(BuildContext context) async {
-    final TimeOfDay? startTime =
-        await showTimePicker(context: context, initialTime: _startTime);
-    if (startTime != null && startTime != _startTime) {
-      setState(() {
-        _startTime = startTime;
-      });
-    }
-  }
-
-  Future<void> _selectEndTime(BuildContext context) async {
-    final TimeOfDay? endTime =
-        await showTimePicker(context: context, initialTime: _endTime);
-    if (endTime != null && endTime != _endTime) {
-      setState(() {
-        _endTime = endTime;
-      });
-    }
   }
 }

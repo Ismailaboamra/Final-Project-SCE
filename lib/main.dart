@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import, prefer_const_constructors, sort_child_properties_last, use_super_parameters
 
 import 'package:final_project_sce/firebase_options.dart';
+import 'package:final_project_sce/pages/AddLessonPage.dart';
 import 'package:final_project_sce/responsive/mobileOfmentor.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,9 +27,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) {
-        return;
-      },
+      create:(context) => ChangeNotifier(),
       child: MaterialApp(
         title: "myApp",
         debugShowCheckedModeBanner: false,
@@ -39,7 +38,7 @@ class MyApp extends StatelessWidget {
             if (snapshot.hasData) {
               return MobileScreenMentor();
             } else {
-              return LoginForm();
+              return LoginForm ();
             }
           },
         ),

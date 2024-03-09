@@ -114,7 +114,7 @@ class _myProfileState extends State<myProfile> {
                       margin: EdgeInsets.fromLTRB(40, 8, 0, 0),
                       // child: UserData(uid: currectUser!.uid, fieldName: 'Username'),
                       child: Text(
-                      userData.getData(),
+                      userData.getData().toString(),
                         style: TextStyle(
                           fontSize: 18,
                           color: primaryColor,
