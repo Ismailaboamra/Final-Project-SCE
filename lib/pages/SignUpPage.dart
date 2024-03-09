@@ -30,7 +30,6 @@ class _SignUpState extends State<SignUp> {
 
   // void Print_values() {
   SignUP() async {
-
     setState(() {
       isLoading = true;
     });
@@ -44,7 +43,12 @@ class _SignUpState extends State<SignUp> {
           FirebaseFirestore.instance.collection("userss");
       users
           .doc('User : ' + FirebaseAuth.instance.currentUser!.uid.toString())
-          .set({'Username':username_Controller.text, 'email': email_Controller.text,  'password':password1_Controller.text})
+          .set({
+            'Username': username_Controller.text,
+            'email': email_Controller.text,
+            'password': password1_Controller.text,
+            'Mentor': false
+          })
           .then((value) => print("User Added"))
           .catchError((error) => print("Failed to add user: $error"));
       showSnackBar(context, '   Done ...', Colors.green);
@@ -78,37 +82,62 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 0, 232, 159),
-        elevation: 10,
-        title: Text("SignUp Page"),
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-      ),
-      body: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: SizedBox(
-            // width: double.infinity,
+        body: SingleChildScrollView(
+            child: Form(
+      key: _formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            padding: EdgeInsets.fromLTRB(21, 18, 20, 18),
+            width: double.infinity,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color(0xeaffffff),
+                  Color.fromARGB(206, 207, 231, 241),
+                  Color(0xaf68cbf2),
+                  Color(0xaa68cbf2),
+                ],
+                stops: [0, 0.48, 0.79, 0],
+              ),
+              borderRadius: BorderRadius.circular(0),
+            ),
             child: Column(
-              // crossAxisAlignment: CrossAxisAlignment.center,
-              // mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: 20,
+                  height: 100,
                 ),
                 SvgPicture.asset(
                   "assets/img/userlogo.svg",
-                  // alignment: Alignment.topCenter,
+                  alignment: Alignment.topCenter,
                   height: 120,
                   width: 150,
+                ),
+                SizedBox(height: 10),
+                SvgPicture.asset('assets/icons/sceMentor.svg', height: 24),
+                SizedBox(height: 20),
+                Text(
+                  'Sign Up',
+                  style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black
+                      // fontStyle: FontStyle.
+                      ),
                 ),
                 SizedBox(height: 20),
                 Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(0),
-                        color: Color.fromARGB(179, 213, 213, 213)),
-                    width: 350,
+                        color: Color.fromARGB(255, 255, 255, 255)),
+                    width: 300,
+                    height: 55,
                     child: MyTextField(
                         validator: (value) {
                           return null;
@@ -124,14 +153,15 @@ class _SignUpState extends State<SignUp> {
                 Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(0),
-                        color: Color.fromARGB(179, 213, 213, 213)),
-                    width: 350,
+                        color: Color.fromARGB(255, 255, 255, 255)),
+                    width: 300,
+                    height: 55,
                     child: MyTextField(
                         validator: (email) {
                           return email!.contains(RegExp(
                                   r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))
                               ? null
-                              : "Enter a valid email";
+                              : " Enter a valid email";
                         },
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         myController: email_Controller,
@@ -144,8 +174,9 @@ class _SignUpState extends State<SignUp> {
                 Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(0),
-                        color: Color.fromARGB(179, 213, 213, 213)),
-                    width: 350,
+                        color: Color.fromARGB(255, 255, 255, 255)),
+                    width: 300,
+                    height: 55,
                     child: MyTextField(
                         validator: (value) {
                           if (value!.length < 8) {
@@ -170,8 +201,9 @@ class _SignUpState extends State<SignUp> {
                 Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(0),
-                        color: Color.fromARGB(179, 213, 213, 213)),
-                    width: 350,
+                        color: Color.fromARGB(255, 255, 255, 255)),
+                    width: 300,
+                    height: 55,
                     child: MyTextField(
                         validator: (value) {
                           if (value!.length < 8) {
@@ -192,24 +224,26 @@ class _SignUpState extends State<SignUp> {
                               });
                             },
                             icon: Icon(Icons.visibility)))),
+                SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       SignUP();
                     } else {
                       showSnackBar(context, 'ERROR', Colors.red);
                     }
                   },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                        Color.fromARGB(255, 0, 232, 159)),
+                  child: Text(
+                    'Sign Up',
+                    style: TextStyle(fontSize: 25),
                   ),
-                  child: isLoading
-                      ? CircularProgressIndicator(
-                          color: Colors.black,
-                        )
-                      : Text("SignUp",
-                          style: TextStyle(fontSize: 25, color: Colors.black)),
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.black,
+                    backgroundColor: Color(0xff4ac08a),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(90),
+                    ),
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -231,12 +265,16 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: 170,
                 )
               ],
             ),
           ),
-        ),
+        ],
       ),
-    );
+    )));
+    
   }
 }
