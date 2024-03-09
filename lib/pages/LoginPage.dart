@@ -203,31 +203,6 @@ class _LoginForm extends State<LoginForm> {
                   Text('Mentor', style: TextStyle(fontSize: 17)),
                 ],
               ),
-
-              // DropdownButtonFormField<String>(
-              //   value: _userType,
-              //   onChanged: (newValue) {
-              //     setState(() {
-              //       _userType = newValue;
-              //     });
-              //   },
-              //   decoration: InputDecoration(
-              //     filled: true,
-              //     fillColor: Colors.white,
-              //     labelText: 'Login as',
-              //     labelStyle: TextStyle(fontSize: 25),
-              //     border: OutlineInputBorder(
-              //       borderRadius: BorderRadius.circular(0),
-              //     ),
-              //   ),
-              //   items: <String>['Student', 'Mentor']
-              //       .map<DropdownMenuItem<String>>((String value) {
-              //     return DropdownMenuItem<String>(
-              //       value: value,
-              //       child: Text(value),
-              //     );
-              //   }).toList(),
-              // ),
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {
@@ -264,7 +239,8 @@ class _LoginForm extends State<LoginForm> {
                       child: Text(
                         "SignUp",
                         style: TextStyle(color: Colors.black, fontSize: 18),
-                      ))
+                      )),
+                      SizedBox(height: 400,)
                 ],
               )
             ],
@@ -272,126 +248,6 @@ class _LoginForm extends State<LoginForm> {
         ),
       ],
     )));
-    // return Scaffold(
-    //   appBar: AppBar(
-    //     backgroundColor: Color.fromARGB(255, 0, 232, 159),
-    //     elevation: 15,
-    //     title: Text("LogIn Page"),
-    //     centerTitle: true,
-    //     automaticallyImplyLeading: false,
-    //   ),
-    //   body: SingleChildScrollView(
-    //     child: Form(
-    //       key: _formKey,
-    //       child: SizedBox(
-    //         width: double.infinity,
-    //         child: Column(
-    //           crossAxisAlignment: CrossAxisAlignment.center,
-    //           mainAxisAlignment: MainAxisAlignment.start,
-    //           children: [
-    //             SizedBox(
-    //               height: 50,
-    //             ),
-    //             SvgPicture.asset(
-    //               "assets/img/userlogo.svg",
-    //               alignment: Alignment.topCenter,
-    //               height: 120,
-    //               width: 150,
-    //             ),
-    //             SizedBox(
-    //               height: 20,
-    //             ),
-    //             Container(
-    //                 decoration: BoxDecoration(
-    //                     borderRadius: BorderRadius.circular(40),
-    //                     color: const Color.fromARGB(255, 255, 255, 255)),
-    //                 width: 300,
-    //                 child: MyTextField(
-    //                     validator: (value) {
-    //                       return value!.contains(RegExp(
-    //                               r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))
-    //                           ? null
-    //                           : "Enter a valid email";
-    //                     },
-    //                     autovalidateMode: AutovalidateMode.disabled,
-    //                     myController: email_Controller,
-    //                     keyboardTypee: TextInputType.emailAddress,
-    //                     hintTextt: "Email",
-    //                     obscureText: false,
-    //                     suffixIcon: IconButton(
-    //                         onPressed: () {}, icon: Icon(Icons.email)))),
-    //             SizedBox(
-    //               height: 20,
-    //             ),
-    //             Container(
-    //                 decoration: BoxDecoration(
-    //                     borderRadius: BorderRadius.circular(40),
-    //                     color: Colors.white),
-    //                 width: 300,
-    //                 child: MyTextField(
-    //                     validator: (value) {
-    //                       if (value == null || value.isEmpty) {
-    //                         return 'Please enter a password';
-    //                       }
-    //                       return null;
-    //                     },
-    //                     autovalidateMode: AutovalidateMode.disabled,
-    //                     myController: password_Controller,
-    //                     keyboardTypee: TextInputType.visiblePassword,
-    //                     hintTextt: "Enter Your Password :",
-    //                     obscureText: isVisable ? true : false,
-    //                     suffixIcon: IconButton(
-    //                         onPressed: () {
-    //                           setState(() {
-    //                             isVisable = !isVisable;
-    //                           });
-    //                         },
-    //                         icon: Icon(Icons.visibility)))),
-    //             SizedBox(
-    //               height: 20,
-    //             ),
-    //             ElevatedButton(
-    //               onPressed: () async {
-    //                 await SignIn();
-    //                 if (!mounted) {
-    //                   return;
-    //                 }
-    //               },
-    //               style: ButtonStyle(
-    //                 backgroundColor: MaterialStateProperty.all(
-    //                     Color.fromARGB(255, 0, 232, 159)),
-    //               ),
-    //               child: Text("LogIn",
-    //                   style: TextStyle(fontSize: 25, color: Colors.black)),
-    //             ),
-    //             SizedBox(
-    //               height: 20,
-    //             ),
-    //             Row(
-    //               mainAxisAlignment: MainAxisAlignment.center,
-    //               children: [
-    //                 Text(
-    //                   "Don't have an account?",
-    //                   style: TextStyle(fontSize: 16),
-    //                 ),
-    //                 TextButton(
-    //                     onPressed: () {
-    //                       Navigator.pushReplacement(
-    //                           context,
-    //                           MaterialPageRoute(
-    //                               builder: (context) => SignUp()));
-    //                     },
-    //                     child: Text(
-    //                       "SignUp",
-    //                       style: TextStyle(color: Colors.black, fontSize: 18),
-    //                     ))
-    //               ],
-    //             )
-    //           ],
-    //         ),
-    //       ),
-    //     ),
-    //   ),
-    // );
+  
   }
 }
