@@ -2,6 +2,7 @@
 
 import 'package:final_project_sce/getUsersFromFiresore.dart';
 import 'package:final_project_sce/pages/LoginPage.dart';
+import 'package:final_project_sce/pages/diary.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/Cupertino.dart';
@@ -19,8 +20,10 @@ class myProfile extends StatefulWidget {
 class _myProfileState extends State<myProfile> {
   final String? email = FirebaseAuth.instance.currentUser?.email.toString();
   final User? currectUser = FirebaseAuth.instance.currentUser;
-  UserData userData = new UserData(uid: FirebaseAuth.instance.currentUser!.uid, fieldName: 'Username',data:"");
-
+  UserData userData = new UserData(
+      uid: FirebaseAuth.instance.currentUser!.uid,
+      fieldName: 'Username',
+      data: "");
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +117,7 @@ class _myProfileState extends State<myProfile> {
                       margin: EdgeInsets.fromLTRB(40, 8, 0, 0),
                       // child: UserData(uid: currectUser!.uid, fieldName: 'Username'),
                       child: Text(
-                      userData.getData().toString(),
+                        userData.getData().toString(),
                         style: TextStyle(
                           fontSize: 18,
                           color: primaryColor,
@@ -161,7 +164,12 @@ class _myProfileState extends State<myProfile> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => diary()),
+                          );
+                        },
                         icon: Image.asset(
                           'assets/icons/diary.png',
                           height: 100,
@@ -170,18 +178,6 @@ class _myProfileState extends State<myProfile> {
                         onPressed: () {},
                         icon: Image.asset(
                           'assets/icons/comments.png',
-                          height: 100,
-                        )),
-                    IconButton(
-                        onPressed: () {},
-                        icon: Image.asset(
-                          'assets/icons/rating.png',
-                          height: 100,
-                        )),
-                    IconButton(
-                        onPressed: () {},
-                        icon: Image.asset(
-                          'assets/icons/rating.png',
                           height: 100,
                         )),
                     IconButton(

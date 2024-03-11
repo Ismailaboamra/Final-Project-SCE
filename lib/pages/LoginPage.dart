@@ -240,11 +240,9 @@ class _LoginForm extends State<LoginForm> {
                         "SignUp",
                         style: TextStyle(color: Colors.black, fontSize: 18),
                       )),
-                  SizedBox(
-                    height: 400,
-                  )
                 ],
-              )
+              ),
+              SizedBox(height: 140)
             ],
           ),
         ),
