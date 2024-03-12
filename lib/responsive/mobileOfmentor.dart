@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_declarations, file_names, avoid_unnecessary_containers, avoid_print
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_declarations, file_names, avoid_unnecessary_containers, avoid_print, unnecessary_import, sized_box_for_whitespace, no_leading_underscores_for_local_identifiers
 
 import 'package:final_project_sce/pages/addLesson.dart';
 import 'package:final_project_sce/pages/alerts.dart';

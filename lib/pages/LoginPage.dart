@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, file_names, non_constant_identifier_names, no_logic_in_create_state, unused_local_variable, prefer_const_constructors_in_immutables, unused_import, use_build_context_synchronously, sort_child_properties_last
+// ignore_for_file: prefer_const_constructors, file_names, non_constant_identifier_names, no_logic_in_create_state, unused_local_variable, prefer_const_constructors_in_immutables, unused_import, use_build_context_synchronously, sort_child_properties_last, unused_field, prefer_const_literals_to_create_immutables
 
 import 'package:final_project_sce/pages/HomePage.dart';
 import 'package:final_project_sce/pages/SignUpPage.dart';
