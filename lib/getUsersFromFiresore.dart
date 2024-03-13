@@ -6,10 +6,13 @@ import 'package:flutter/Cupertino.dart';
 
 class UserData {
   final String uid;
-  final String fieldName;
-  String data;
+  // final String fieldName;
+  static dynamic data;
 
-  UserData({required this.uid, required this.fieldName, required this.data});
+  UserData({
+    required this.uid,
+    // required this.fieldName,
+  });
 
   static Future<Map<String, dynamic>?> getUserDataFromFirestore(
       String uid) async {
@@ -36,28 +39,40 @@ class UserData {
     }
   }
 
-  void getUserDataField(String uid, String field) async {
-    try {
-      // Fetch user data from Firestore
-      Map<String, dynamic>? userData = await getUserDataFromFirestore(uid);
-      // If user data exists and the field exists in the data, return the field value
-      if (userData != null && userData.containsKey(field)) {
-        data = userData[field];
-      } else {
-        // If user data or field does not exist, return null
-        return null;
-      }
-    } catch (e) {
-      // Return null and log the error if an exception occurs
-      print('Error fetching user data field: $e');
+Future<void> printCollection() async {
+  try {
+    // Access the Firestore instance and collection
+    final CollectionReference collection = FirebaseFirestore.instance.collection('userss');
+
+    // Query the collection
+    QuerySnapshot querySnapshot = await collection.get();
+
+    // Loop through the documents and print their data
+    querySnapshot.docs.forEach((doc) {
+      print(doc.data());
+    });
+  } catch (e) {
+    // Handle any errors that occur
+    print('Error retrieving collection: $e');
+  }
+}
+Future<Map<String, dynamic>?> getUserDataField(String field) async {
+  try {
+    // Fetch user data from Firestore
+    Map<String, dynamic>? userData = await getUserDataFromFirestore(uid);
+    // If user data exists and the field exists in the data, return the field value
+    if (userData != null && userData.containsKey(field)) {
+      return userData; // Return the whole user data map
+    } else {
+      // If user data or field does not exist, return null
       return null;
     }
+  } catch (e) {
+    // Return null and log the error if an exception occurs
+    print('Error fetching user data field: $e');
+    return null;
   }
+}
 
-  String getData() {
-    getUserDataField(uid, fieldName);
-    print(data);
-    return fieldName+" : "+  data.toString();
-  }
 
 }

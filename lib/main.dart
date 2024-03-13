@@ -26,36 +26,37 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create:(context) => ChangeNotifier(),
-      child: MaterialApp(
-        title: "myApp",
-        debugShowCheckedModeBanner: false,
-        // home: MobileScreen(),
-        home: StreamBuilder(
-          stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return MobileScreenMentor();
-            } else {
-              return LoginForm ();
-            }
-          },
-        ),
-      ),
-    );
-
-    // return MaterialApp(
-    //   debugShowCheckedModeBanner: false,
-    //   theme: ThemeData.light(useMaterial3: true),
-    //   initialRoute: '/LoginForm',
-
-    //   routes: {
-    //      '/':(context) => const HomePage(),
-    //     '/LoginForm':(context) =>  LoginForm(),
-    //     '/SignUp':(context) =>  SignUp()
-
-    //   },
+    // return ChangeNotifierProvider(
+    //   create:(context) => ChangeNotifier(),
+    //   child: MaterialApp(
+    //     title: "myApp",
+    //     debugShowCheckedModeBanner: false,
+    //     home: LoginForm(),
+    //     // home: StreamBuilder(
+    //     //   stream: FirebaseAuth.instance.authStateChanges(),
+    //     //   builder: (context, snapshot) {
+    //     //     if (snapshot.hasData) {
+    //     //       return MobileScreen();
+    //     //     } else {
+    //     //       return LoginForm ();
+    //     //     }
+    //     //   },
+    //     // ),
+    //   ),
     // );
+
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.light(useMaterial3: true),
+      initialRoute: '/LoginForm',
+
+      routes: {
+         '/LoginForm':(context) => LoginForm(),
+        '/SignUp':(context) =>  SignUp(),
+        '/mobileScreen':(context) => MobileScreen(),
+        '/mobileMentorScreen':(context) => MobileScreenMentor()
+
+      },
+    );
   }
 }

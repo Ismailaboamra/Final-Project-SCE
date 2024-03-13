@@ -19,8 +19,35 @@ class myProfile extends StatefulWidget {
 class _myProfileState extends State<myProfile> {
   final String? email = FirebaseAuth.instance.currentUser?.email.toString();
   final User? currectUser = FirebaseAuth.instance.currentUser;
-  UserData userData = new UserData(uid: FirebaseAuth.instance.currentUser!.uid, fieldName: 'Username',data:"");
+  // dynamic userData = new UserData(uid: FirebaseAuth.instance.currentUser!.uid).getUserDataField('Username');
+  Future<String> getUsername() async {
+    Map<String, dynamic>? userDataMap =
+        await (new UserData(uid: FirebaseAuth.instance.currentUser!.uid))
+            .getUserDataField('Username');
+    if (userDataMap == null) {
+      return 'Null';
+    } else {
+      return '${userDataMap['Username']}';
+    }
+  }
+    String username = ''; // State variable to hold the fetched data
 
+  @override
+  void initState() {
+    super.initState();
+    // Call the fetchData function when the widget is initialized
+    _fetchData();
+  }
+
+  // Function to fetch data asynchronously
+  void _fetchData() async {
+    // Await the Future to get the String result
+    String result = await getUsername();
+    // Update the state with the received data
+    setState(() {
+      username = result;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +116,13 @@ class _myProfileState extends State<myProfile> {
                       child: Row(
                         children: [
                           IconButton(
-                              onPressed: () {},
+                              onPressed: () async {
+                                // if (userDataMap != null ) {
+                                //   print('${userDataMap['Mentor']}');
+                                // } else {
+                                //   print('it is null');
+                                // }
+                              },
                               icon: Image.asset('assets/icons/like.png')),
                         ],
                       ),
@@ -114,7 +147,7 @@ class _myProfileState extends State<myProfile> {
                       margin: EdgeInsets.fromLTRB(40, 8, 0, 0),
                       // child: UserData(uid: currectUser!.uid, fieldName: 'Username'),
                       child: Text(
-                      userData.getData().toString(),
+                        'Username : '+username,
                         style: TextStyle(
                           fontSize: 18,
                           color: primaryColor,
