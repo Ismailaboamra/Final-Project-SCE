@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, implementation_imports, unused_import, prefer_const_literals_to_create_immutables, avoid_print, avoid_unnecessary_containers, file_names, camel_case_types, sort_child_properties_last
+// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, implementation_imports, unused_import, prefer_const_literals_to_create_immutables, avoid_print, avoid_unnecessary_containers, file_names, camel_case_types, sort_child_properties_last, use_super_parameters, no_logic_in_create_state
 
 import 'package:final_project_sce/pages/alerts.dart';
 import 'package:final_project_sce/pages/home.dart';
@@ -19,7 +19,6 @@ class AddLessons extends StatefulWidget {
 
 class _AddLessonsState extends State<AddLessons> {
   final int lastPage;
-
   _AddLessonsState(this.lastPage);
 
   @override
