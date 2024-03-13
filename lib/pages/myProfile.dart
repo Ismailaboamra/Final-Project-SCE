@@ -1,7 +1,8 @@
-// ignore_for_file: file_names, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_import, unnecessary_import, avoid_print, unused_local_variable
+// ignore_for_file: file_names, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_import, unnecessary_import, avoid_print, unused_local_variable, unnecessary_new
 
 import 'package:final_project_sce/getUsersFromFiresore.dart';
 import 'package:final_project_sce/pages/LoginPage.dart';
+import 'package:final_project_sce/pages/diary.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/Cupertino.dart';
@@ -19,7 +20,7 @@ class myProfile extends StatefulWidget {
 class _myProfileState extends State<myProfile> {
   final String? email = FirebaseAuth.instance.currentUser?.email.toString();
   final User? currectUser = FirebaseAuth.instance.currentUser;
-  // dynamic userData = new UserData(uid: FirebaseAuth.instance.currentUser!.uid).getUserDataField('Username');
+
   Future<String> getUsername() async {
     Map<String, dynamic>? userDataMap =
         await (new UserData(uid: FirebaseAuth.instance.currentUser!.uid))
@@ -48,6 +49,8 @@ class _myProfileState extends State<myProfile> {
       username = result;
     });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -145,8 +148,8 @@ class _myProfileState extends State<myProfile> {
                   Align(
                     child: Container(
                       margin: EdgeInsets.fromLTRB(40, 8, 0, 0),
-                      // child: UserData(uid: currectUser!.uid, fieldName: 'Username'),
                       child: Text(
+
                         'Username : '+username,
                         style: TextStyle(
                           fontSize: 18,
@@ -194,7 +197,12 @@ class _myProfileState extends State<myProfile> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => diary()),
+                          );
+                        },
                         icon: Image.asset(
                           'assets/icons/diary.png',
                           height: 100,
@@ -203,18 +211,6 @@ class _myProfileState extends State<myProfile> {
                         onPressed: () {},
                         icon: Image.asset(
                           'assets/icons/comments.png',
-                          height: 100,
-                        )),
-                    IconButton(
-                        onPressed: () {},
-                        icon: Image.asset(
-                          'assets/icons/rating.png',
-                          height: 100,
-                        )),
-                    IconButton(
-                        onPressed: () {},
-                        icon: Image.asset(
-                          'assets/icons/rating.png',
                           height: 100,
                         )),
                     IconButton(
