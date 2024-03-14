@@ -1,5 +1,6 @@
 // ignore_for_file: file_names, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_import, unnecessary_import, avoid_print, unused_local_variable, unnecessary_new
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_project_sce/getUsersFromFiresore.dart';
 import 'package:final_project_sce/pages/LoginPage.dart';
 import 'package:final_project_sce/pages/diary.dart';
@@ -18,12 +19,39 @@ class myProfile extends StatefulWidget {
 }
 
 class _myProfileState extends State<myProfile> {
+  int count = 0;
   final String? email = FirebaseAuth.instance.currentUser?.email.toString();
   final User? currectUser = FirebaseAuth.instance.currentUser;
-  UserData userData = new UserData(
-      uid: FirebaseAuth.instance.currentUser!.uid,
-      fieldName: 'Username',
-      data: "");
+
+  Future<String> getUsername() async {
+    Map<String, dynamic>? userDataMap =
+        await (new UserData(uid: FirebaseAuth.instance.currentUser!.uid))
+            .getUserDataField('Username');
+    if (userDataMap == null) {
+      return 'Null';
+    } else {
+      return '${userDataMap['Username']}';
+    }
+  }
+
+  String username = ''; // State variable to hold the fetched data
+
+  @override
+  void initState() {
+    super.initState();
+    // Call the fetchData function when the widget is initialized
+    _fetchData();
+  }
+
+  // Function to fetch data asynchronously
+  void _fetchData() async {
+    // Await the Future to get the String result
+    String result = await getUsername();
+    // Update the state with the received data
+    setState(() {
+      username = result;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +120,9 @@ class _myProfileState extends State<myProfile> {
                       child: Row(
                         children: [
                           IconButton(
-                              onPressed: () {},
+                              onPressed: () async {
+                                count=count  + 1;
+                              },
                               icon: Image.asset('assets/icons/like.png')),
                         ],
                       ),
@@ -105,7 +135,7 @@ class _myProfileState extends State<myProfile> {
                       child: Row(
                         children: [
                           Text(
-                            "1251",
+                            '$count',
                             style: TextStyle(fontSize: 18),
                           ),
                         ],
@@ -115,9 +145,8 @@ class _myProfileState extends State<myProfile> {
                   Align(
                     child: Container(
                       margin: EdgeInsets.fromLTRB(40, 8, 0, 0),
-                      // child: UserData(uid: currectUser!.uid, fieldName: 'Username'),
                       child: Text(
-                        userData.getData().toString(),
+                        'Username : ' + username,
                         style: TextStyle(
                           fontSize: 18,
                           color: primaryColor,
