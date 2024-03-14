@@ -1,5 +1,9 @@
-// ignore_for_file: prefer_const_constructors, file_names, non_constant_identifier_names, no_logic_in_create_state, unused_local_variable, prefer_const_constructors_in_immutables, unused_import, use_build_context_synchronously, sort_child_properties_last, unused_field, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:ffi';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:final_project_sce/getUsersFromFiresore.dart';
 import 'package:final_project_sce/pages/HomePage.dart';
 import 'package:final_project_sce/pages/SignUpPage.dart';
 import 'package:final_project_sce/pages/home.dart';
@@ -25,48 +29,8 @@ class _LoginForm extends State<LoginForm> {
   final password_Controller = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool isVisable = true;
-  String? _userType;
-
-  SignIn() async {
-    try {
-      if (email_Controller.text.isEmpty || password_Controller.text.isEmpty) {
-        // Display error if email or password is empty
-        showSnackBar(context, 'Email OR password are required.', Colors.red);
-        return;
-      }
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: email_Controller.text, password: password_Controller.text);
-      email_Controller.clear();
-      password_Controller.clear();
-
-      if (_userType == 'Student') {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => MobileScreen()),
-        );
-      } else {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => MobileScreenMentor()),
-        );
-      }
-
-      showSnackBar(context, '   Done ...', Colors.green);
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        showSnackBar(context, 'No user found for that email.', Colors.red);
-      } else if (e.code == 'wrong-password') {
-        showSnackBar(
-            context, 'Incorrect password. Please try again.', Colors.red);
-      } else {
-        // Handle other Firebase Authentication exceptions
-        showSnackBar(context, 'An error occurred: ${e.message}', Colors.red);
-      }
-    } catch (e) {
-      // Handle other exceptions
-      showSnackBar(context, 'An unexpected error occurred: $e', Colors.red);
-    }
-  }
+  String? _selecteduserType;
+  bool isMentor = false;
 
   @override
   void dispose() {
@@ -180,10 +144,10 @@ class _LoginForm extends State<LoginForm> {
                   Text('LogIn as :', style: TextStyle(fontSize: 20)),
                   Radio<String>(
                     value: 'Student',
-                    groupValue: _userType,
+                    groupValue: _selecteduserType,
                     onChanged: (value) {
                       setState(() {
-                        _userType = value;
+                        _selecteduserType = value;
                       });
                     },
                   ),
@@ -193,10 +157,10 @@ class _LoginForm extends State<LoginForm> {
                   ),
                   Radio<String>(
                     value: 'Mentor',
-                    groupValue: _userType,
+                    groupValue: _selecteduserType,
                     onChanged: (value) {
                       setState(() {
-                        _userType = value;
+                        _selecteduserType = value;
                       });
                     },
                   ),
@@ -206,7 +170,7 @@ class _LoginForm extends State<LoginForm> {
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {
-                  await SignIn();
+                  SignIn();
                   if (!mounted) {
                     return;
                   }
@@ -240,6 +204,9 @@ class _LoginForm extends State<LoginForm> {
                         "SignUp",
                         style: TextStyle(color: Colors.black, fontSize: 18),
                       )),
+                  SizedBox(
+                    height: 400,
+                  )
                 ],
               ),
               SizedBox(height: 140)
@@ -248,5 +215,70 @@ class _LoginForm extends State<LoginForm> {
         ),
       ],
     )));
+  }
+
+  void SignIn() async {
+    try {
+      if (email_Controller.text.isEmpty || password_Controller.text.isEmpty) {
+        // Display error if email or password is empty
+        showSnackBar(context, 'Email OR password are required.', Colors.red);
+        return;
+      }
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email_Controller.text, password: password_Controller.text);
+      email_Controller.clear();
+      password_Controller.clear();
+
+      if (FirebaseAuth.instance.currentUser == null) {
+        showSnackBar(context, 'User not signed In.', Colors.red);
+      } else {
+        if (_selecteduserType == 'Student') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MobileScreen()),
+          );
+          showSnackBar(context, '   Done ...)}', Colors.green);
+        } else {
+          User? user = FirebaseAuth.instance.currentUser;
+          var kk = FirebaseFirestore.instance
+              .collection('userss')
+              .doc('User : ' + user!.uid)
+              .get()
+              .then((DocumentSnapshot documentSnapshot) {
+            if (documentSnapshot.exists) {
+              print(documentSnapshot.get('Mentor').runtimeType.toString());
+              // isMentor = isMentor && documentSnapshot.get('Mentor');
+              print('is mentor : ' + isMentor.toString());
+
+              if (documentSnapshot.get('Mentor') as bool == true) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MobileScreenMentor(),
+                  ),
+                );
+                showSnackBar(context, '   Done ...)}', Colors.green);
+              } else {
+                showSnackBar(context, 'THis user not mentor', Colors.red);
+                // Navigator.pop(context);
+              }
+            } else {}
+          });
+        }
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        showSnackBar(context, 'No user found for that email.', Colors.red);
+      } else if (e.code == 'wrong-password') {
+        showSnackBar(
+            context, 'Incorrect password. Please try again.', Colors.red);
+      } else {
+        // Handle other Firebase Authentication exceptions
+        showSnackBar(context, 'An error occurred: ${e.message}', Colors.red);
+      }
+    } catch (e) {
+      // Handle other exceptions
+      showSnackBar(context, 'An unexpected error occurred: $e', Colors.red);
+    }
   }
 }
