@@ -1,5 +1,6 @@
 // ignore_for_file: file_names, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_import, unnecessary_import, avoid_print, unused_local_variable, unnecessary_new
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_project_sce/getUsersFromFiresore.dart';
 import 'package:final_project_sce/pages/LoginPage.dart';
 import 'package:final_project_sce/pages/diary.dart';
@@ -18,6 +19,7 @@ class myProfile extends StatefulWidget {
 }
 
 class _myProfileState extends State<myProfile> {
+  int count = 0;
   final String? email = FirebaseAuth.instance.currentUser?.email.toString();
   final User? currectUser = FirebaseAuth.instance.currentUser;
 
@@ -31,7 +33,8 @@ class _myProfileState extends State<myProfile> {
       return '${userDataMap['Username']}';
     }
   }
-    String username = ''; // State variable to hold the fetched data
+
+  String username = ''; // State variable to hold the fetched data
 
   @override
   void initState() {
@@ -49,8 +52,6 @@ class _myProfileState extends State<myProfile> {
       username = result;
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -120,11 +121,7 @@ class _myProfileState extends State<myProfile> {
                         children: [
                           IconButton(
                               onPressed: () async {
-                                // if (userDataMap != null ) {
-                                //   print('${userDataMap['Mentor']}');
-                                // } else {
-                                //   print('it is null');
-                                // }
+                                count=count  + 1;
                               },
                               icon: Image.asset('assets/icons/like.png')),
                         ],
@@ -138,7 +135,7 @@ class _myProfileState extends State<myProfile> {
                       child: Row(
                         children: [
                           Text(
-                            "1251",
+                            '$count',
                             style: TextStyle(fontSize: 18),
                           ),
                         ],
@@ -149,8 +146,7 @@ class _myProfileState extends State<myProfile> {
                     child: Container(
                       margin: EdgeInsets.fromLTRB(40, 8, 0, 0),
                       child: Text(
-
-                        'Username : '+username,
+                        'Username : ' + username,
                         style: TextStyle(
                           fontSize: 18,
                           color: primaryColor,

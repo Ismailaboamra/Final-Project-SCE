@@ -2,6 +2,7 @@
 
 import 'package:final_project_sce/pages/addLesson.dart';
 import 'package:final_project_sce/pages/alerts.dart';
+import 'package:final_project_sce/pages/diary.dart';
 import 'package:final_project_sce/pages/home.dart';
 import 'package:final_project_sce/pages/lessons.dart';
 import 'package:final_project_sce/pages/myProfile.dart';
@@ -26,97 +27,97 @@ class _MobileScreenMentorState extends State<MobileScreenMentor> {
   TextEditingController nameSubject = TextEditingController();
   TextEditingController date = TextEditingController();
 
-  void _showModalBottomSheet() {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return Container(
-          height: 900,
-          width: 800,
-          child: Column(
-            // child: Column(
-            children: [
-              Container(
-                // margin: EdgeInsets.only(left: 90, right: 100),
-                margin: EdgeInsets.fromLTRB(90, 20, 90, 20),
-                child:
-                    SvgPicture.asset('assets/icons/addAlesson.svg', height: 24),
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: TextField(
-                  controller: nameStudent,
-                  decoration: InputDecoration(
-                    floatingLabelBehavior: FloatingLabelBehavior.always,
-                    labelText: "Name for the student:",
-                    labelStyle: TextStyle(fontSize: 23),
-                    hintText: "Enter the name",
-                    hintStyle: TextStyle(color: Colors.grey, fontSize: 15),
-                    floatingLabelStyle: TextStyle(
-                        color: Colors.black,
-                        fontSize: 23,
-                        fontWeight: FontWeight.bold),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.greenAccent),
-                    ),
-                    border: OutlineInputBorder(borderSide: BorderSide()),
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
-                child: TextField(
-                  controller: nameSubject,
-                  decoration: InputDecoration(
-                    floatingLabelBehavior: FloatingLabelBehavior.always,
-                    labelText: "Name for the subject:",
-                    labelStyle: TextStyle(fontSize: 23),
-                    hintText: "Enter the subject",
-                    hintStyle: TextStyle(color: Colors.grey, fontSize: 15),
-                    floatingLabelStyle: TextStyle(
-                        color: Colors.black,
-                        fontSize: 23,
-                        fontWeight: FontWeight.bold),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.greenAccent),
-                    ),
-                    border: OutlineInputBorder(borderSide: BorderSide()),
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
-                child: TextField(
-                    controller: date,
-                    decoration: InputDecoration(
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      labelText: "Data of the lesson",
-                      labelStyle: TextStyle(fontSize: 23),
-                      hintText: "Date",
-                      hintStyle: TextStyle(color: Colors.grey, fontSize: 15),
-                      floatingLabelStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 23,
-                          fontWeight: FontWeight.bold),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.greenAccent),
-                      ),
-                      prefixIcon: Icon(Icons.calendar_today),
-                      border: OutlineInputBorder(borderSide: BorderSide()),
-                      // filled: true,
-                    ),
-                    readOnly: true,
-                    onTap: () {
-                      _selectData();
-                      // print(_selectData());
-                    }),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
+  // void _showModalBottomSheet() {
+  //   showModalBottomSheet(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return Container(
+  //         height: 900,
+  //         width: 800,
+  //         child: Column(
+  //           // child: Column(
+  //           children: [
+  //             Container(
+  //               // margin: EdgeInsets.only(left: 90, right: 100),
+  //               margin: EdgeInsets.fromLTRB(90, 20, 90, 20),
+  //               child:
+  //                   SvgPicture.asset('assets/icons/addAlesson.svg', height: 24),
+  //             ),
+  //             Container(
+  //               margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+  //               child: TextField(
+  //                 controller: nameStudent,
+  //                 decoration: InputDecoration(
+  //                   floatingLabelBehavior: FloatingLabelBehavior.always,
+  //                   labelText: "Name for the student:",
+  //                   labelStyle: TextStyle(fontSize: 23),
+  //                   hintText: "Enter the name",
+  //                   hintStyle: TextStyle(color: Colors.grey, fontSize: 15),
+  //                   floatingLabelStyle: TextStyle(
+  //                       color: Colors.black,
+  //                       fontSize: 23,
+  //                       fontWeight: FontWeight.bold),
+  //                   focusedBorder: OutlineInputBorder(
+  //                     borderSide: BorderSide(color: Colors.greenAccent),
+  //                   ),
+  //                   border: OutlineInputBorder(borderSide: BorderSide()),
+  //                 ),
+  //               ),
+  //             ),
+  //             Container(
+  //               margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
+  //               child: TextField(
+  //                 controller: nameSubject,
+  //                 decoration: InputDecoration(
+  //                   floatingLabelBehavior: FloatingLabelBehavior.always,
+  //                   labelText: "Name for the subject:",
+  //                   labelStyle: TextStyle(fontSize: 23),
+  //                   hintText: "Enter the subject",
+  //                   hintStyle: TextStyle(color: Colors.grey, fontSize: 15),
+  //                   floatingLabelStyle: TextStyle(
+  //                       color: Colors.black,
+  //                       fontSize: 23,
+  //                       fontWeight: FontWeight.bold),
+  //                   focusedBorder: OutlineInputBorder(
+  //                     borderSide: BorderSide(color: Colors.greenAccent),
+  //                   ),
+  //                   border: OutlineInputBorder(borderSide: BorderSide()),
+  //                 ),
+  //               ),
+  //             ),
+  //             Container(
+  //               margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
+  //               child: TextField(
+  //                   controller: date,
+  //                   decoration: InputDecoration(
+  //                     floatingLabelBehavior: FloatingLabelBehavior.always,
+  //                     labelText: "Data of the lesson",
+  //                     labelStyle: TextStyle(fontSize: 23),
+  //                     hintText: "Date",
+  //                     hintStyle: TextStyle(color: Colors.grey, fontSize: 15),
+  //                     floatingLabelStyle: TextStyle(
+  //                         color: Colors.black,
+  //                         fontSize: 23,
+  //                         fontWeight: FontWeight.bold),
+  //                     focusedBorder: OutlineInputBorder(
+  //                       borderSide: BorderSide(color: Colors.greenAccent),
+  //                     ),
+  //                     prefixIcon: Icon(Icons.calendar_today),
+  //                     border: OutlineInputBorder(borderSide: BorderSide()),
+  //                     // filled: true,
+  //                   ),
+  //                   readOnly: true,
+  //                   onTap: () {
+  //                     _selectData();
+  //                     // print(_selectData());
+  //                   }),
+  //             ),
+  //           ],
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +133,7 @@ class _MobileScreenMentorState extends State<MobileScreenMentor> {
                 lastPage--;
               }
               if (currentPage == 2) {
-                _showModalBottomSheet();
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>diary()));
               }
             });
           },

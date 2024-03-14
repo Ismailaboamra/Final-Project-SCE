@@ -237,7 +237,7 @@ class _LoginForm extends State<LoginForm> {
             context,
             MaterialPageRoute(builder: (context) => MobileScreen()),
           );
-          print('Document does not exist on the database');
+          showSnackBar(context, '   Done ...)}', Colors.green);
         } else {
           User? user = FirebaseAuth.instance.currentUser;
           var kk = FirebaseFirestore.instance
@@ -257,7 +257,7 @@ class _LoginForm extends State<LoginForm> {
                     builder: (context) => MobileScreenMentor(),
                   ),
                 );
-                print('Document does not exist on the database');
+                showSnackBar(context, '   Done ...)}', Colors.green);
               } else {
                 showSnackBar(context, 'THis user not mentor', Colors.red);
                 // Navigator.pop(context);
@@ -266,8 +266,6 @@ class _LoginForm extends State<LoginForm> {
           });
         }
       }
-
-      showSnackBar(context, '   Done ...)}', Colors.green);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         showSnackBar(context, 'No user found for that email.', Colors.red);
