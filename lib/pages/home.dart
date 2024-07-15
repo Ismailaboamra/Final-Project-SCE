@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:final_project_sce/shared/colors.dart';
+import 'package:final_project_sce/Controller/MentorController.dart';
+import 'package:final_project_sce/MentorsData.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -12,6 +14,16 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  // List<Mentor> getMentors() {
+  Map<String, String> _mentorDetails = new Map<String, String>();
+
+  Future<void> _fetchMentor() async {
+    Map<String, String> mentor = await MentorData.getMaxMentorLikes();
+    setState(() {
+      _mentorDetails = mentor;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +32,10 @@ class _HomeState extends State<Home> {
         title: SvgPicture.asset('assets/icons/sceMentor.svg', height: 24),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                // mentorData.getMentorDataFromFirestore();
+                // print("---------"+mentorData.getMentorByEmail('xx@xx.com').toString());
+              },
               icon: Icon(
                 Icons.messenger_outline,
               )),
@@ -90,7 +105,7 @@ class _HomeState extends State<Home> {
                         // color: Colors.amber,
                         margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
                         child: Text(
-                          "Bhaa Aldda",
+                          _mentorDetails['username'].toString(),
                           style: TextStyle(
                             fontSize: 20,
                             color: primaryColor,
@@ -134,7 +149,10 @@ class _HomeState extends State<Home> {
                               child: Row(
                                 children: [
                                   IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        _fetchMentor();
+                                        print(_mentorDetails);
+                                      },
                                       icon:
                                           Image.asset('assets/icons/like.png')),
                                 ],
@@ -148,7 +166,7 @@ class _HomeState extends State<Home> {
                               child: Row(
                                 children: [
                                   Text(
-                                    "1251",
+                                    _mentorDetails['likes'].toString(),
                                     style: TextStyle(fontSize: 18),
                                   ),
                                 ],

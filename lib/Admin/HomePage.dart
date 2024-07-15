@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, non_constant_identifier_names, unnecessary_this, unused_import, file_names, avoid_print
 
+import 'package:final_project_sce/Admin/addCourse.dart';
 import 'package:final_project_sce/pages/LoginPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -63,6 +64,15 @@ class _HomePageState extends State<HomePage> {
                     title: Text("Home"),
                     leading: Icon(Icons.home),
                     onTap: () {}),
+                ListTile(
+                    title: Text("Add Course"),
+                    leading: Icon(Icons.circle_notifications),
+                    onTap: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AddCoursePage()));
+                    }),
                 ListTile(
                     title: Text("Logout"),
                     leading: Icon(Icons.exit_to_app),
