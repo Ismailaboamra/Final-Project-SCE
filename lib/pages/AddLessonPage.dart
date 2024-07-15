@@ -1,5 +1,6 @@
 // ignore_for_file: file_names, use_key_in_widget_constructors, library_private_types_in_public_api, prefer_const_constructors, avoid_print
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class LessonRequestForm  extends StatefulWidget {
@@ -9,11 +10,32 @@ class LessonRequestForm  extends StatefulWidget {
 
 class _AddLessonPageState extends State<LessonRequestForm > {
   String? selectedCourse;
-  List<String> courses = [
-    'Course A',
-    'Course B',
-    'Course C'
-  ]; // Replace with your actual course list
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  List<String> _courseNames = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchCourseNames();
+  }
+
+  Future<void> _fetchCourseNames() async {
+    try {
+      QuerySnapshot querySnapshot = await _firestore.collection('Courses').get();
+      List<String> courseNames = [];
+      for (var doc in querySnapshot.docs) {
+        courseNames.add(doc.id); // Document ID is the course name
+      }
+      setState(() {
+        _courseNames = courseNames;
+      });
+    } catch (e) {
+      print('Error fetching course names: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error fetching course names')),
+      );
+    }
+  } 
   Map<String, bool> selectedDays = {
     'Sunday': false,
     'Monday': false,
@@ -46,7 +68,7 @@ class _AddLessonPageState extends State<LessonRequestForm > {
                   selectedCourse = value;
                 });
               },
-              items: courses.map((course) {
+              items: _courseNames.map((course) {
                 return DropdownMenuItem<String>(
                   value: course,
                   child: Text(course),

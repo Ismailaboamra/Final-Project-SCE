@@ -9,7 +9,7 @@ import 'package:final_project_sce/responsive/mobile.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'pages/HomePage.dart';
+import 'Admin/HomePage.dart';
 import 'pages/LoginPage.dart';
 import 'pages/SignUpPage.dart';
 

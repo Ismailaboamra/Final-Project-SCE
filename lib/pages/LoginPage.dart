@@ -4,7 +4,7 @@ import 'dart:ffi';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_project_sce/getUsersFromFiresore.dart';
-import 'package:final_project_sce/pages/HomePage.dart';
+import 'package:final_project_sce/Admin/HomePage.dart';
 import 'package:final_project_sce/pages/SignUpPage.dart';
 import 'package:final_project_sce/pages/home.dart';
 import 'package:final_project_sce/pages/myProfile.dart';
@@ -141,7 +141,7 @@ class _LoginForm extends State<LoginForm> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('LogIn as :', style: TextStyle(fontSize: 20)),
+                  Text('LogIn as :', style: TextStyle(fontSize: 17)),
                   Radio<String>(
                     value: 'Student',
                     groupValue: _selecteduserType,
@@ -153,7 +153,7 @@ class _LoginForm extends State<LoginForm> {
                   ),
                   Text(
                     'Student',
-                    style: TextStyle(fontSize: 17),
+                    style: TextStyle(fontSize: 15),
                   ),
                   Radio<String>(
                     value: 'Mentor',
@@ -164,7 +164,20 @@ class _LoginForm extends State<LoginForm> {
                       });
                     },
                   ),
-                  Text('Mentor', style: TextStyle(fontSize: 17)),
+                  Text('Mentor', style: TextStyle(fontSize: 15)),
+                  Radio<String>(
+                    value: 'admin',
+                    groupValue: _selecteduserType,
+                    onChanged: (value) {
+                      setState(() {
+                        _selecteduserType = value;
+                      });
+                    },
+                  ),
+                  Text(
+                    'admin',
+                    style: TextStyle(fontSize: 15),
+                  ),
                 ],
               ),
               SizedBox(height: 20),
@@ -232,13 +245,15 @@ class _LoginForm extends State<LoginForm> {
       if (FirebaseAuth.instance.currentUser == null) {
         showSnackBar(context, 'User not signed In.', Colors.red);
       } else {
-        if (_selecteduserType == 'Student') {
+        if (_selecteduserType == 'Student' &&
+            email_Controller.text != 'admin@admiin.com') {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => MobileScreen()),
           );
           showSnackBar(context, '   Done ...)}', Colors.green);
-        } else {
+        } else if (_selecteduserType == 'Mentor' &&
+            email_Controller.text != 'admin@admiin.com') {
           User? user = FirebaseAuth.instance.currentUser;
           var kk = FirebaseFirestore.instance
               .collection('userss')
@@ -262,8 +277,18 @@ class _LoginForm extends State<LoginForm> {
                 showSnackBar(context, 'THis user not mentor', Colors.red);
                 // Navigator.pop(context);
               }
-            } else {}
+            } else {
+
+            }
           });
+        } else if (_selecteduserType == 'admin') {
+          // if (email_Controller.text == 'admin@admiin.com' &&
+          //     password_Controller.text == '12345678') {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => HomePage()));
+          // }
+        } else {
+          showSnackBar(context, 'Failed to login admin', Colors.red);
         }
       }
     } on FirebaseAuthException catch (e) {
