@@ -1,9 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_declarations
 
-import 'package:final_project_sce/pages/alerts.dart';
+import 'package:final_project_sce/pages/MentorsNofifactionsPage.dart';
 import 'package:final_project_sce/pages/home.dart';
 import 'package:final_project_sce/pages/lessons.dart';
 import 'package:final_project_sce/pages/myProfile.dart';
+import 'package:final_project_sce/student/StudentNotificationsPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/Cupertino.dart';
 import 'package:final_project_sce/shared/colors.dart';
@@ -17,6 +19,9 @@ class MobileScreen extends StatefulWidget {
 
 class _MobileScreenState extends State<MobileScreen> {
   final PageController _pageController = PageController();
+  final String? email = FirebaseAuth.instance.currentUser?.email.toString();
+  final User? userID = FirebaseAuth.instance.currentUser;
+
   int currentPage = 0;
 
   @override
@@ -60,7 +65,7 @@ class _MobileScreenState extends State<MobileScreen> {
           children: [
             Home(),
             Lessons(),
-            Alerts(),
+          ChatListScreen(currentUserId: userID!.uid),
             myProfile(),
           ],
         ));

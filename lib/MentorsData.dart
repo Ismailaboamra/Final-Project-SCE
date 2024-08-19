@@ -24,19 +24,19 @@ class MentorData {
     });
   }
 
-  static Future<Mentor> getMentorByEmail(String email) async {
-    var event = await FirebaseFirestore.instance.collection("Mentors").get();
-    for (var doc in event.docs) {
-      if (doc.get('email').toString() == email) {
-        print('exammmm -------' +
-            '${doc.get('email')}' +
-            '${doc.get('username')}');
-        return Mentor(email, doc.get('username'));
-      }
-    }
-    print('----Null------');
-    return Mentor('email', 'userName'); // default value if not found
-  }
+  // static Future<Mentor> getMentorByEmail(String email) async {
+  //   // var event = await FirebaseFirestore.instance.collection("Mentors").get();
+  //   // for (var doc in event.docs) {
+  //   //   if (doc.get('email').toString() == email) {
+  //   //     print('exammmm -------' +
+  //   //         '${doc.get('email')}' +
+  //   //         '${doc.get('username')}');
+  //   //     return Mentor(email, doc.get('username'), id: '', email: '', courses: []);
+  //   //   }
+  //   // }
+  //   // print('----Null------');
+  //   // return Mentor('email', 'userName'); // default value if not found
+  // }
 
   static Future<Map<String, String>> getMaxMentorLikes() async {
     Map<String, String> detailsMentor = new Map<String, String>();

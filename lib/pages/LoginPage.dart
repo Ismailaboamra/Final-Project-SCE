@@ -8,8 +8,8 @@ import 'package:final_project_sce/Admin/HomePage.dart';
 import 'package:final_project_sce/pages/SignUpPage.dart';
 import 'package:final_project_sce/pages/home.dart';
 import 'package:final_project_sce/pages/myProfile.dart';
-import 'package:final_project_sce/responsive/mobile.dart';
-import 'package:final_project_sce/responsive/mobileOfmentor.dart';
+import 'package:final_project_sce/responsive/studentPage.dart';
+import 'package:final_project_sce/Mentor/mobileOfmentor.dart';
 import 'package:final_project_sce/shared/SnackBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -233,10 +233,10 @@ class _LoginForm extends State<LoginForm> {
   void SignIn() async {
     try {
       if (email_Controller.text.isEmpty || password_Controller.text.isEmpty) {
-        // Display error if email or password is empty
         showSnackBar(context, 'Email OR password are required.', Colors.red);
         return;
       }
+
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email_Controller.text, password: password_Controller.text);
       email_Controller.clear();
@@ -245,6 +245,9 @@ class _LoginForm extends State<LoginForm> {
       if (FirebaseAuth.instance.currentUser == null) {
         showSnackBar(context, 'User not signed In.', Colors.red);
       } else {
+        User? user = FirebaseAuth.instance.currentUser;
+        String userEmail = user!.email!;
+
         if (_selecteduserType == 'Student' &&
             email_Controller.text != 'admin@admiin.com') {
           Navigator.push(
@@ -254,39 +257,26 @@ class _LoginForm extends State<LoginForm> {
           showSnackBar(context, '   Done ...)}', Colors.green);
         } else if (_selecteduserType == 'Mentor' &&
             email_Controller.text != 'admin@admiin.com') {
-          User? user = FirebaseAuth.instance.currentUser;
-          var kk = FirebaseFirestore.instance
-              .collection('userss')
-              .doc('User : ' + user!.uid)
-              .get()
-              .then((DocumentSnapshot documentSnapshot) {
-            if (documentSnapshot.exists) {
-              print(documentSnapshot.get('Mentor').runtimeType.toString());
-              // isMentor = isMentor && documentSnapshot.get('Mentor');
-              print('is mentor : ' + isMentor.toString());
+          var mentorDoc = await FirebaseFirestore.instance
+              .collection('Mentors')
+              .where('email', isEqualTo: userEmail)
+              .get();
 
-              if (documentSnapshot.get('Mentor') as bool == true) {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MobileScreenMentor(),
-                  ),
-                );
-                showSnackBar(context, '   Done ...)}', Colors.green);
-              } else {
-                showSnackBar(context, 'THis user not mentor', Colors.red);
-                // Navigator.pop(context);
-              }
-            } else {
-
-            }
-          });
-        } else if (_selecteduserType == 'admin') {
-          // if (email_Controller.text == 'admin@admiin.com' &&
-          //     password_Controller.text == '12345678') {
+          if (mentorDoc.docs.isNotEmpty) {
             Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => HomePage()));
-          // }
+              context,
+              MaterialPageRoute(
+                builder: (context) => MobileScreenMentor(),
+              ),
+            );
+            showSnackBar(context, '   Done ...)}', Colors.green);
+          } else {
+            showSnackBar(
+                context, 'This user is not registered as a mentor', Colors.red);
+          }
+        } else if (_selecteduserType == 'admin') {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => HomePage()));
         } else {
           showSnackBar(context, 'Failed to login admin', Colors.red);
         }
@@ -298,11 +288,9 @@ class _LoginForm extends State<LoginForm> {
         showSnackBar(
             context, 'Incorrect password. Please try again.', Colors.red);
       } else {
-        // Handle other Firebase Authentication exceptions
         showSnackBar(context, 'An error occurred: ${e.message}', Colors.red);
       }
     } catch (e) {
-      // Handle other exceptions
       showSnackBar(context, 'An unexpected error occurred: $e', Colors.red);
     }
   }
