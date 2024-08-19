@@ -1,13 +1,24 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Mentor {
-  String userName;
+  String id;
   String email;
-  Mentor(this.email, this.userName);
-  String getDetails() {
-    return 'Email: $email, Username: $userName';
+  List<String> courses;
+
+  Mentor({required this.id, required this.email, required this.courses});
+
+  factory Mentor.fromDocument(DocumentSnapshot doc) {
+    return Mentor(
+      id: doc.id,
+      email: doc['email'],
+      courses: List<String>.from(doc['courses']),
+    );
   }
 
-  @override
-  String toString() {
-    return 'Mentor(email: $email, username: $userName,)';
+  Map<String, dynamic> toMap() {
+    return {
+      'email': email,
+      'courses': courses,
+    };
   }
 }

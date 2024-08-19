@@ -1,9 +1,14 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, non_constant_identifier_names, unnecessary_this, unused_import, file_names, avoid_print
 
+import 'package:final_project_sce/Admin/AdminRequestPage.dart';
+import 'package:final_project_sce/Admin/MentorsDeatiles.dart';
 import 'package:final_project_sce/Admin/addCourse.dart';
 import 'package:final_project_sce/pages/LoginPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -65,13 +70,31 @@ class _HomePageState extends State<HomePage> {
                     leading: Icon(Icons.home),
                     onTap: () {}),
                 ListTile(
-                    title: Text("Add Course"),
+                    title: Text("add courses"),
                     leading: Icon(Icons.circle_notifications),
                     onTap: () {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) => AddCoursePage()));
+                    }),
+                    ListTile(
+                    title: Text("Students Requests"),
+                    leading: Icon(Icons.circle_notifications),
+                    onTap: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AdminRequestsPage()));
+                    }),
+                      ListTile(
+                    title: Text("List of mentors"),
+                    leading: Icon(Icons.circle_notifications),
+                    onTap: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MentorManagementPage()));
                     }),
                 ListTile(
                     title: Text("Logout"),
@@ -89,11 +112,12 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      appBar: AppBar(
-        title: Text("Home"),
-        titleTextStyle: TextStyle(fontSize: 27, color: Colors.black),
+      appBar:    AppBar(
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 0, 232, 159),
+        title: SvgPicture.asset('assets/icons/sceMentor.svg', height: 24),
+        actions: [
+          
+        ],
       ),
     );
   }
